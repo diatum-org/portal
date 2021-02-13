@@ -1,0 +1,62 @@
+.stats-control {
+  width: 100%;
+}
+
+.stats-text {
+  width: 100%;
+}
+
+.stats-input {
+  width: 80%;
+  display: inline-block;
+}
+
+.stats-button {
+  width: 10%;
+  display: inline-block;
+  padding-left: 16px;
+}
+
+.stats-header {
+  text-align: center;
+  font-size: 18px;
+}
+
+.stats-close {
+  width: 5%;
+  float: right;
+  font-size: 18px;
+  color: #DDDDDD;
+  position: relative;
+  top: -16px;
+  left: 8px;
+  text-align: right;
+}
+
+.stats-close-x {
+  cursor: pointer;
+}
+
+.stats-radio {
+  width: 100%;
+  font-size: 14px;
+}
+
+.stats-label {
+  cursor: pointer;
+}
+
+.stats-option {
+  width: 20%;
+  display: inline-block;
+  text-align: center;
+}
+
+.stats-icon {
+  width: 24px;
+  cursor: pointer;
+}
+
+
+
+

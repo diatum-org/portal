@@ -1,0 +1,47 @@
+<div class="header">
+  <img class="logo" src="assets/logo.png">
+</div>
+
+<div *ngIf="entry==null" class="login-container">
+  <div class="login-header">Host Device Portal</div>
+  <div class="login-form">
+    <div class="login-input">
+      <mat-form-field class="login-text">
+        <input matInput placeholder="Device Name" [(ngModel)]="login">
+      </mat-form-field>
+    </div>
+    <div class="login-input">
+      <mat-form-field class="login-text">
+        <input type="password" matInput placeholder="Pasword" [(ngModel)]="password">
+      </mat-form-field>
+    </div>
+
+    <div class="login-control">
+      <button class="login-button" mat-raised-button color="primary" (click)="onLogin()">Login</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="entry!=null" class="entry-container">
+  <div class="entry-header">Device Name: {{ login }}</div>
+  <div class="entry-fields">
+    <div class="entry-field">{{ getStatus() }}</div>
+    <div class="entry-field">{{ getTimestamp() }}</div>
+    <div class="entry-field">{{ getNode() }}</div>
+    <div class="entry-field">{{ getAddress() }}</div>
+  </div>
+  <div class="entry-control">
+    <button class="entry-button" mat-raised-button color="primary" (click)="onAccounts()">Accounts</button>
+    <button class="entry-button" mat-raised-button color="primary" (click)="onStats()">Stats</button>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="row">
+    <div class="col-md-2"><a class="option" href="https://diatum.org/about/">About Diatum</a></div>
+    <div class="col-md-2"><a class="option" href="https://diatum.org/policies-introduction/">Policies</a></div>
+    <div class="col-md-2"><a class="option" href="https://diatum.org/developers/">Help</a></div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3 copyright">&copy; Copyright Diatum 2021</div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="accounts-control">
+  <div class="accounts-close">
+    <i class="fa fa-times accounts-close-x" (click)="onClose()"></i>
+  </div>
+</div>
+
+<div class="accounts-data">
+  <div class="accounts-header">
+    <div class="accounts-name">Account</div>
+    <div class="accounts-options">
+      <i class="fa fa-user-plus accounts-add" (click)="onAdd()"></i>
+    </div>
+  </div>
+  <div *ngFor="let i of accounts" class="accounts-entry">
+    <div class="accounts-name">{{ getAccountName(i.emigoId) }}</div>
+    <div class="accounts-options">
+      <i class="fa fa-sign-in accounts-reset" (click)="onReset(i.emigoId)"></i>
+      <i class="fa fa-times accounts-remove" (click)="onDelete(i.emigoId)"></i>
+    </div>
+  </div>
+</div>
+

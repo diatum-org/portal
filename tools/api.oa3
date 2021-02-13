@@ -1,0 +1,901 @@
+
+openapi: 3.0.0
+# Added by API Auto Mocking Plugin
+info:
+  description:
+    Portal for registering and maintaining digital identity nodes
+      emigo-id - hex encoded sha256 of an emigo 4096 public key
+      secure-token - hex encoded 256 bit random number
+
+  version: 1.0.4
+  title: Device Portal API
+  contact:
+    email: rolandosborne@diatum.org
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+
+  - name: admin
+    description: interface for setting portal configuration
+
+  - name: device
+    description: interface for managing registration
+
+  - name: account
+    description: interface for account access
+
+
+paths:
+
+  /admin/config:
+    get:
+      tags:
+        - admin
+      description: Retrieve config of portal
+      operationId: get-config
+      parameters:
+        - name: token
+          in: query
+          description: access token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortalConfig'
+        '401':
+          description: access denied
+        '500':
+          description: internal server error
+
+  /admin/config/node:
+    put:
+      tags:
+        - admin
+      description: Set config of portal
+      operationId: set-portal-node
+      parameters:
+        - name: token
+          in: query
+          description: access token
+          required: true
+          schema:
+            type: string
+        - name: value
+          in: query
+          description: updated emigo node
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '401':
+          description: access denied
+        '500':
+          description: internal server error
+
+  /admin/config/token:
+    put:
+      tags:
+        - admin
+      description: Set config of portal
+      operationId: set-portal-token
+      parameters:
+        - name: token
+          in: query
+          description: access token
+          required: true
+          schema:
+            type: string
+        - name: value
+          in: query
+          description: updated emigo token
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '401':
+          description: access denied
+        '500':
+          description: internal server error
+
+  /admin/config/domain:
+    post:
+      tags:
+        - admin
+      description: Add domain to portal
+      operationId: add-domain
+      parameters:
+        - name: token
+          in: query
+          description: access token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain'
+        '401':
+          description: access denied
+        '500':
+          description: internal server error
+    put:
+      tags:
+        - admin
+      description: Update portal domain
+      operationId: set-domain
+      parameters:
+        - name: token
+          in: query
+          description: access token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain'
+        '401':
+          description: access denied
+        '500':
+          description: internal server error
+      requestBody:
+        description: updated domain
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Domain'
+
+  /admin/stats:
+    get:
+      tags:
+        - admin
+      description: Retrieve server metrics
+      operationId: get-stats
+      parameters:
+        - name: token
+          in: query
+          description: access token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PortalStat'
+        '401':
+          description: access denied
+        '500':
+          description: internal server error
+    post:
+      tags:
+        - admin
+      description: Add a new stat
+      operationId: add-stat
+      parameters:
+        - name: token
+          in: query
+          description: access token
+          required: true
+          schema:
+            type: string
+        - name: processor
+          in: query
+          description: time
+          required: true
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100
+        - name: memory
+          in: query
+          description: current memory free
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: storage
+          in: query
+          description: current storage free
+          required: true
+          schema:
+            type: integer
+            format: int64
+
+      responses:
+        '200':
+          description: successful operation
+        '401':
+          description: access denied
+        '500':
+          description: internal server error
+
+  /device:
+    get:
+      tags:
+        - device
+      description: Retrieve record
+      operationId: get-device
+      parameters:
+        - name: login
+          in: query
+          description: user login
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: user password
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceEntry'
+        '401':
+          description: invalid password
+        '500':
+          description: internal server error
+    post:
+      tags:
+        - device
+      description: Register a device name
+      operationId: add-device
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+        '406':
+          description: device limit reached
+        '500':
+          description: internal server error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceParams'
+        description: parameters for device
+
+  /device/available:
+    get:
+      tags:
+        - device
+      description: Retrieve available certs
+      operationId: get-available
+      responses:
+        '200':
+          description: successful request
+          content:
+            application/json:
+              schema:
+                type: number
+        '500':
+          description: internal server error
+
+  /device/login:
+    get:
+      tags:
+        - device
+      description: check if login is available
+      operationId: check-login
+      parameters:
+        - name: login
+          in: query
+          description: device login
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: update successful
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '500':
+          description: internal server error
+
+  /device/token:
+    get:
+      tags:
+        - device
+      description: check if token is valid
+      operationId: check-token
+      parameters:
+        - name: token
+          in: query
+          description: expiring token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '404':
+          description: not found
+        '500':
+          description: internal server error
+
+  /device/address:
+    put:
+      tags:
+        - device
+      description: Update address
+      operationId: update-address
+      parameters:
+        - name: token
+          in: query
+          description: access token
+          required: true
+          schema:
+            type: string
+            format: secure-token
+      responses:
+        '200':
+          description: update successful
+        '401':
+          description: invalid token
+        '500':
+          description: internal server error
+
+  /device/port:
+    put:
+      tags:
+        - device
+      description: Test port forwarding
+      operationId: test-port
+      parameters:
+        - name: value
+          in: query
+          description: port to test
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: update successful
+        '500':
+          description: internal server error
+
+  /device/password:
+    put:
+      tags:
+        - device
+      description: Update password
+      operationId: update-password
+      parameters:
+        - name: login
+          in: query
+          description: user login
+          schema:
+            type: string
+        - name: current
+          in: query
+          description: user password
+          required: true
+          schema:
+            type: string
+            format: secure-token
+        - name: next
+          in: query
+          description: user password
+          required: true
+          schema:
+            type: string
+            format: secure-token
+      responses:
+        '200':
+          description: update successful
+        '401':
+          description: invalid password
+        '500':
+          description: internal server error
+
+  /device/accounts:
+    post:
+      tags:
+        - device
+      description: Generate create account link
+      operationId: create-account
+      parameters:
+        - name: login
+          in: query
+          description: user login
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: user password
+          required: true
+          schema:
+            type: string
+        - name: expire
+          in: query
+          description: expire seconds
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: string
+        '401':
+          description: invalid password
+        '500':
+          description: internal server error
+    put:
+      tags:
+        - device
+      description: Generate reset account password link
+      operationId: reset-account
+      parameters:
+        - name: login
+          in: query
+          description: user login
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: user password
+          required: true
+          schema:
+            type: string
+        - name: expire
+          in: query
+          description: expire seconds
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: emigoId
+          in: query
+          description: id to reset
+          schema:
+            type: string
+            format: emigo-id
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: string
+        '401':
+          description: invalid password
+        '500':
+          description: internal server error
+
+  /account/identity:
+    post:
+      tags:
+        - account
+      description: Create a new identity
+      operationId: add-identity
+      parameters:
+        - name: token
+          in: query
+          description: create account token
+          required: true
+          schema:
+            type: string
+            format: secure-token
+        - name: password
+          in: query
+          description: password to use for new account
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: account created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountEntry'
+        '401':
+          description: invalid password
+        '500':
+          description: internal server error
+    put:
+      tags:
+        - account
+      description: Attach existing identity
+      operationId: set-identity
+      parameters:
+        - name: token
+          in: query
+          description: reset account password token
+          required: true
+          schema:
+            type: string
+            format: secure-token
+        - name: password
+          in: query
+          description: password to use for new account
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: account created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountEntry'
+        '401':
+          description: invalid password
+        '500':
+          description: internal server error
+    get:
+      tags:
+        - account
+      description: Retrive account access token
+      operationId: get-identity
+      parameters:
+        - name: emigoId
+          in: query
+          description: id of emigo to access
+          required: true
+          schema:
+            type: string
+            format: emigo-id
+        - name: password
+          in: query
+          description: password to use for login
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: account created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountEntry'
+        '401':
+          description: invalid password
+        '500':
+          description: internal server error
+
+  /account/password:
+    put:
+      tags:
+        - account
+      description: Change account password
+      operationId: change-password
+      parameters:
+        - name: emigoId
+          in: query
+          description: id of emigo to access
+          required: true
+          schema:
+            type: string
+            format: emigo-id
+        - name: current
+          in: query
+          description: current password to use for login
+          required: true
+          schema:
+            type: string
+        - name: next
+          in: query
+          description: next password to use for login
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: account updated
+        '401':
+          description: invalid password
+        '500':
+          description: internal server error
+
+components:
+  schemas:
+
+    PortalStat:
+      type: object
+      properties:
+        timestamp:
+          type: integer
+          format: int32
+        processor:
+          type: integer
+          format: int32
+        memory:
+          type: integer
+          format: int64
+        storage:
+          type: integer
+          format: int64
+        requests:
+          type: integer
+          format: int64
+        devices:
+          type: integer
+          format: int64
+        accounts:
+          type: integer
+          format: int64
+        certs:
+          type: integer
+          format: int64
+
+    DeviceParams:
+      type: object
+      properties:
+        login:
+          type: string
+        password:
+          type: string
+        port:
+          type: integer
+          format: int32
+        app:
+          type: string
+        identity:
+          $ref: '#/components/schemas/IdentityToken'
+
+    DeviceEntry:
+      type: object
+      properties:
+        status:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
+        address:
+          type: string
+        hostname:
+          type: string
+        port:
+          type: integer
+          format: int32
+        app:
+          type: string
+        identity:
+          $ref: '#/components/schemas/IdentityToken'
+
+    AccountEntry:
+      type: object
+      properties:
+        node:
+          type: string
+        token:
+          type: string
+          format: secure-token
+
+    IdentityToken:
+      type: object
+      properties:
+        accountToken:
+          type: string
+          format: secure-token
+        accessToken:
+          type: string
+          format: secure-token
+        statToken:
+          type: string
+          format: secure-token
+        confToken:
+          type: string
+          format: secure-token
+
+    PortalConfig:
+      type: object
+      properties:
+        emigoToken:
+          type: string
+        emigoNode:
+          type: string
+        domains:
+          type: array
+          items:
+            $ref: '#/components/schemas/Domain'
+
+    Domain:
+      type: object
+      properties:
+        id:
+          type: integer
+        region:
+          type: string
+        key:
+          type: string
+        keyId:
+          type: string
+        zoneId:
+          type: string
+        name:
+          type: string
+        enabled:
+          type: boolean
+
+    EmigoToken:
+      type: object
+      required:
+        - emigoId
+        - emigo
+        - signature
+        - token
+      properties:
+        emigoId:
+          type: string
+          format: emigo-id
+        emigo:
+          $ref: '#/components/schemas/EmigoMessage'
+        signature:
+          type: string
+          format: signature
+        token:
+          type: string
+          format: Base64 & JSON serialized string of token
+
+    EmigoMessage:
+      type: object
+      required:
+        - key
+        - keyType
+        - signature
+        - data
+      properties:
+        key:
+          type: string
+          format: emigo-key
+        keyType:
+          type: string
+        signature:
+          type: string
+          format: signature of Base64 data converted to hex string
+        data:
+          type: string
+          format: Base64 & JSON serialized string of data object
+
+    LinkMessage:
+      type: object
+      required:
+        - emigo
+        - signature
+        - link
+      properties:
+        emigo:
+          $ref: '#/components/schemas/EmigoMessage'
+        signature:
+          type: string
+          format: signature
+        create:
+          type: string
+          format: Base64 & JSON serialized string of link request
+        attach:
+          type: string
+          format: Base64 & JSON serialized string of link request
+
+    ServiceAccess:
+      type: object
+      properties:
+        enableShow:
+          type: boolean
+        enableIdentity:
+          type: boolean
+        enableProfile:
+          type: boolean
+        enableGroup:
+          type: boolean
+        enableShare:
+          type: boolean
+        enablePrompt:
+          type: boolean
+        enableService:
+          type: boolean
+        enableIndex:
+          type: boolean
+        enableUser:
+          type: boolean
+        enableAccess:
+          type: boolean
+        enableAccount:
+          type: boolean
+        enableAgent:
+          type: boolean
+        enableContact:
+          type: boolean
+
+    UserEntry:
+      type: object
+      required:
+        - emigo
+        - data
+      properties:
+        emigo:
+          $ref: '#/components/schemas/Emigo'
+        data:
+          $ref: '#/components/schemas/UserEntryData'
+
+    UserEntryData:
+      type: object
+      required:
+        - enabled
+        - accountToken
+        - serviceToken
+      properties:
+        enabled:
+          type: boolean
+        accountToken:
+          type: string
+          format: secure-token
+        serviceToken:
+          type: string
+          format: secure-token
+
+    Emigo:
+      type: object
+      required:
+        - emigoId
+        - node
+        - revision
+        - version
+      properties:
+        emigoId:
+          type: string
+          format: emigoId
+        name:
+          type: string
+        description:
+          type: string
+        logo:
+          type: string
+          format: base64 encoding of binary image
+        location:
+          type: string
+        node:
+          type: string
+          example: https://node.coredb.org:9999/app
+        registry:
+          type: string
+          example: https://registry.coredb.org:8888/app
+        revision:
+          type: integer
+          format: int32
+        version:
+          type: string
+          format: protocol-version
+        handle:
+          type: string
+

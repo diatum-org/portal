@@ -1,0 +1,81 @@
+.profile-container {
+  text-align: center;
+}
+
+.profile-logo {
+}
+
+.profile-title {
+  font-size: 20px;
+  text-align: center;
+  padding: 16px;
+}
+
+.profile-form {
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 500px;
+  margin: 0 auto;
+  background: #ffffff;
+  overflow: hidden;
+} 
+
+.profile-details {
+}
+
+.profile-id {
+  font-size: 16px;
+}
+
+.profile-placeholder {
+  color: #999999;
+  font-style: italic;
+}
+
+.profile-handle {
+  font-size: 16px;
+  padding-bottom: 4px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.profile-name {
+  font-size: 18px;
+  padding-bottom: 4px;
+  text-align: center;
+}
+
+.profile-location {
+  font-size: 16px;
+  padding-bottom: 4px;
+  text-align: center;
+}
+
+.profile-description {
+  font-size: 12px;
+  padding-bottom: 4px;
+  text-align: center;
+}
+
+.profile-action {
+  padding-top: 16px;
+  text-align: center;
+}
+
+.generate-button {
+  background: #387CA5;
+  color: #FFFFFF;
+}
+
+.profile-space {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+
+.profile-icon {
+  margin-left: 8px;
+  cursor: pointer;
+  color: #387CA5;
+}
+

@@ -1,0 +1,60 @@
+.username-container {
+  color: #444444;
+}
+
+.username-close {
+  font-size: 16px;
+  top: -8px;
+  float: right;
+}
+
+.username-close-x {
+  cursor: pointer;
+}
+
+.username-title {
+  text-align: left;
+  font-size: 18px;
+  color: #777777;
+}
+
+.username-buttons {
+  text-align: right;
+}
+
+.username-button {
+  margin-left: 16px;
+  background: #387CA5;
+}
+
+.username-space {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+.username-fields {
+  text-align: center;
+  padding-top: 16px;
+}
+
+.username-text {
+  display: inline-block;
+  width: 200px;
+}
+
+.username-at {
+  display: inline-block;
+  font-size: 18px;
+  text-align: center;
+  width: 36px;
+}
+
+.username-alert {
+  color: red;
+  text-align: center;
+  height: 24px;
+  position: relative;
+  top: -8px;
+}
+

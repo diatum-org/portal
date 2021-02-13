@@ -1,0 +1,25 @@
+<div class="expire-container">
+  <div class="expire-close">
+    <i class="fa fa-times expire-close-x" (click)="onClose()"></i>
+  </div>
+
+  <div class="expire-title">
+    <span>App Attachment Code</span>
+  </div>
+
+  <div class="expire-note">
+    <div *ngIf="copied" class="expire-copied">copied</div>
+  </div>
+  
+  <div class="expire-result">
+    <div class="expire-code">{{ code }}</div>
+    <div class="expire-copy"><i class="fa fa-files-o" [ngClass]="{ 'expire-nocopy': code==null }" (click)="onCopy()"></i></div>
+  </div>
+  
+  <div class="expire-generate">
+    <mat-form-field class="expire-hours">
+      <input class="expire-input" type="number" matInput placeholder="Minutes Live" min="1" max="999" [(ngModel)]="expire">
+    </mat-form-field>
+    <button class="expire-button" mat-raised-button color="primary" class="generate-button" (click)="onGenerate()">Generate</button>
+</div>
+</div>

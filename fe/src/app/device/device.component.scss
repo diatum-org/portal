@@ -1,0 +1,115 @@
+.login-container {
+  top: calc(50vh - 190px);
+  position: relative;
+  padding: 16px;
+}
+
+.login-form {
+  border-radius: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  max-width: 500px;
+  margin: 0 auto;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.login-header {
+  font-size: 20px;
+  text-align: center;
+  color: #777777;
+  padding: 16px;
+}
+
+.login-text {
+  width: 100%;
+  text-align: center;
+}
+
+.login-input {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.login-control {
+  left: calc(50% - 58px);
+  position: relative;
+  padding-right: 8px;
+}
+
+.login-button {
+  width: 84px;
+  margin-left: 16px;
+  background: #387CA5;
+}
+
+.entry-container {
+  border-radius: 8px;
+  padding: 16px;
+  background: #ffffff;
+  width: 400px;
+  top: calc(50vh - 175px);
+  position: relative;
+  margin: 0 auto;
+  color: #444444;
+}
+
+.entry-header {
+  font-size: 20px;
+  text-align: center;
+}
+
+.entry-field {
+  text-align: center;
+  font-size: 16px;
+  padding: 2px;
+}
+
+.entry-button {
+  width: 94px;
+  margin: 4px;
+  display: inline-block;
+  background: #387CA5;
+}
+
+.entry-control {
+  padding-left: calc(50% - 100px);
+} 
+
+.entry-fields {
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  padding: 12px;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  color: #808080;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  color: #888888;
+  padding: 8px;
+  text-align: center;
+}
+
+.option {
+  cursor: pointer;
+  color: #888888;
+}
+
+.copyright {
+}
+
+.header {
+  background-color: white;
+}
+
+.logo {
+  height: 72px;
+  padding: 8px;
+}
+

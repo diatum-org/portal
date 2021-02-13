@@ -1,0 +1,28 @@
+<div class="username-container">
+
+  <div class="username-title">
+    <span>Account Username</span>
+  </div>
+
+  <div class="username-fields">
+    <mat-form-field class="username-text">
+      <input matInput placeholder="Username" (keydown)="onUpdate()" spellcheck="false" [(ngModel)]="handle">
+    </mat-form-field>
+    <div class="username-at">@</div>
+    <mat-form-field class="username-text">
+      <input matInput placeholder="Registry" (keydown)="onUpdate()" spellcheck="false" [(ngModel)]="registry">
+    </mat-form-field>
+  </div>
+
+  <div class="username-alert">
+    <span *ngIf="alert">Username Not Available</span>
+  </div>
+
+  <div class="username-buttons">
+    <button class="username-button" mat-raised-button color="primary" (click)="onCancel()">Cancel</button>
+    <div class="username-space"></div>
+    <button class="username-button" mat-raised-button color="primary" [disabled]="disabled" 
+        (click)="onSave()">Save</button>
+  </div>
+
+</div>

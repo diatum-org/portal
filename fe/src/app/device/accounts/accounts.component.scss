@@ -1,0 +1,101 @@
+.accounts-close {
+  width: 5%;
+  float: right;
+  font-size: 18px;
+  color: #DDDDDD;
+  position: relative;
+  display: inline-block;
+  top: -16px;
+  left: 8px;
+  text-align: right;
+}
+
+.accounts-close-x {
+  cursor: pointer;
+}
+
+.accounts-data {
+  padding: 16px;
+  overflow: auto;
+  border: 1px solid #eeeeee;
+  border-radius: 4px;
+  height: 450px;
+  width: calc(100% - 32px);
+  color: #808080;
+}
+
+.accounts-header {
+  color: #444444;
+  border-bottom: 1px solid #777777;
+  margin-bottom: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.accounts-name {
+  width: 80%;
+  display: inline-block;
+}
+
+.accounts-entry {
+  padding: 4px;
+  border-bottom: 1px solid #dddddd;
+}
+
+.accounts-create {
+  display: inline-block;
+}
+
+.accounts-options {
+  width: 20%;
+  text-align: right;
+  display: inline-block;
+}
+
+.accounts-add {
+  cursor: pointer;
+  font-size: 16px;
+  color: #6a6;
+}
+
+.accounts-reset {
+  cursor: pointer;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 16px;
+  color: #668;
+}
+
+.accounts-edit {
+  cursor: pointer;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 16px;
+  color: #66a;
+}
+
+.accounts-remove {
+  cursor: pointer;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 16px;
+  color: #a66;
+}
+
+.accounts-adding {
+  border-radius: 4px;
+  border: 2px solid #444;
+  background: #ffffff;
+  position: absolute;
+  top: calc(50vh - 50px);
+  left: calc(50vw - 112px);
+  padding: 32px;
+  font-size: 16px;
+}
+

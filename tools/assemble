@@ -1,0 +1,45 @@
+set -e
+
+MAJOR=`cat major.version`
+MINOR=`cat minor.version`
+VERSION="${MAJOR}_${MINOR}_$1"
+
+# clear previous installer
+rm -rf artifacts
+rm -rf export
+
+# create export path
+mkdir -p export
+
+# create new payloads
+mkdir -p artifacts
+cp ./major.version artifacts/
+cp ./minor.version artifacts/
+cp ./tools/install artifacts/
+cp ./tools/upgrade artifacts/
+cp ./be/target/app.war artifacts/
+cp ./tools/renew.sh artifacts/
+cp ./tools/synccert.sh artifacts/
+cp ./tools/setup.sql artifacts/
+cp ./tools/stat.sh artifacts/
+cp ./tools/test.sh artifacts/
+cp ./tools/register.sh artifacts/
+cp ./tools/update.sh artifacts/
+cp ./tools/schema/baseline.sql artifacts/
+cp ./tools/schema/V01__noop.sql artifacts/
+cp ./tools/schema/V02__domains.sql artifacts/
+cd artifacts
+echo "$1" > build.version
+tar cvf install.tar app.war renew.sh synccert.sh setup.sql stat.sh test.sh register.sh update.sh baseline.sql V01__noop.sql V02__domains.sql major.version minor.version build.version
+md5sum install.tar > install.tar.md5
+cd ..
+
+# create installer
+tar czf ./artifacts/installer.tgz -C artifacts install install.tar install.tar.md5
+cat tools/decompress_install artifacts/installer.tgz > ./artifacts/installer
+
+# export
+mv ./artifacts/installer ./export/${VERSION}_portal_install
+
+exit 0
+

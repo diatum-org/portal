@@ -1,0 +1,63 @@
+<div class="config-control">
+  <div class="config-close">
+    <i class="fa fa-times config-close-x" (click)="onClose()"></i>
+  </div>
+</div>
+
+<div *ngIf="configSet" class="config-data">
+  <div class="config-row">
+    <mat-form-field class="config-node">
+      <mat-label>Emigo Node</mat-label>
+      <input matInput [(ngModel)]="config.emigoNode" (change)="onNode()" spellcheck=false>
+    </mat-form-field>
+    <div class="config-icon">
+      <i *ngIf="nodeSet" class="fa fa-floppy-o config-check" (click)="onSaveNode()"></i>
+    </div>
+    <mat-form-field class="config-token">
+      <mat-label>Emigo Token</mat-label>
+      <input matInput [(ngModel)]="config.emigoToken" (change)="onToken()" spellcheck=false>
+    </mat-form-field>
+    <div class="config-icon">
+      <i *ngIf="tokenSet" class="fa fa-floppy-o config-check" (click)="onSaveToken()"></i>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="configSet" class="config-domains">
+
+  <div class="config-domain config-header">
+    <div class="config-name">Domain Name</div>
+    <div class="config-region">Region</div>
+    <div class="config-zone">Zone</div>
+    <div class="config-keyid">Key ID</div>
+    <div class="config-key">Key</div>
+    <div class="config-enable">Enabled</div>
+    <div class="config-save" (click)="onAdd()"><i class="fa fa-plus"></i></div>
+  </div>
+
+  <div *ngFor="let d of config.domains" class="config-domain">
+    <div class="config-name">
+      <input matInput [(ngModel)]="d.name" (change)="onDomain(d.id)" placeholder="domain name" spellcheck=false>
+    </div>
+    <div class="config-region">
+      <input matInput [(ngModel)]="d.region" (change)="onDomain(d.id)" placeholder="region" spellcheck=false>
+    </div>
+    <div class="config-zone">
+      <input matInput [(ngModel)]="d.zoneId" (change)="onDomain(d.id)" placeholder="zone" spellcheck=false>
+    </div>
+    <div class="config-keyid">
+      <input matInput [(ngModel)]="d.keyId" (change)="onDomain(d.id)" placeholder="key id" spellcheck=false>
+    </div>
+    <div class="config-key">
+      <input matInput [(ngModel)]="d.key" (change)="onDomain(d.id)" placeholder="key value" spellcheck=false>
+    </div>
+    <div class="config-enable" (click)="onEnable(d)">
+      <i *ngIf="d.enabled" class="fa fa-check-square config-check"></i>
+      <i *ngIf="!d.enabled" class="fa fa-square-o config-check"></i>
+    </div>
+    <div *ngIf="isSet(d.id)" class="config-save">
+      <i class="fa fa-floppy-o config-check" (click)="onSaveDomain(d)"></i>
+    </div>
+  </div>
+
+</div>

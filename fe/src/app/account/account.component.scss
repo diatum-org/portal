@@ -1,0 +1,89 @@
+.account-entry {
+  top: calc(50vh - 222px);
+  color: #444444;
+  padding: 16px;
+  position: relative;
+}
+
+.account-profile {
+  top: calc(50vh - 280px);
+  color: #444444;
+  padding: 16px;
+  position: relative;
+}
+
+.account-title {
+  font-size: 20px;
+  text-align: center;
+  padding: 16px;
+}
+
+.account-message {
+  font-size: 16px;
+  text-align: center;
+  padding-bottom: 16px;
+}
+
+.account-redirect {
+  font-size: 12px;
+  text-align: center;
+}
+
+.account-text {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.account-form {
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 500px;
+  margin: 0 auto;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.account-control {
+  text-align: center;
+}
+
+.account-button {
+  background: #387CA5;
+}
+
+.account-spinner {
+  margin: 0 auto;
+  position: relative;
+  top: -156px;
+  opacity: 0.5;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  color: #888888;
+  padding: 8px;
+  text-align: center;
+}
+
+.option {
+  cursor: pointer;
+  color: #888888;
+}
+
+.copyright {
+}
+
+.header {
+  background-color: white;
+}
+
+.logo {
+  height: 72px;
+  padding: 8px;
+}
+  

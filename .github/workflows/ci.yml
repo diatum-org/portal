@@ -18,19 +18,39 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      # Build frontend of registry app server
+      - name: Build frontent
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          cd fe
+          npm install
+          npm install @angular/cli
+          npm run-script ng build -- --prod --base-href /app/
+
+      # Build backend of registry app server
+      - name: Build backend
+        run: |
+          cd be
+          mvn -B verify # -B batch mode makes Maven less verbose
+          mvn install -DskipTests
+
+      # Export installer for registry app server
+      - name: Export installer
+        run: |
+          rm -rf export
+          mkdir -p export
+          bash tools/assemble $GITHUB_RUN_NUMBER
+
+      # Export installer
+      - name: Export
+        uses: actions/upload-artifact@v2
+        with:
+          name: installer
+          path: export
+

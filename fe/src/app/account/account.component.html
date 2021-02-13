@@ -1,0 +1,64 @@
+<div class="header">
+  <img class="logo" src="assets/logo.png">
+</div>
+
+<div class="account-entry" *ngIf="entry==null">
+  <div class="account-title">Account Portal</div>
+  <div *ngIf="init">
+    <div *ngIf="mode=='invalid'" class="account-message">Link is no longer valid.</div>
+    <div *ngIf="mode=='invalid'" class="account-redirect">Redirecting to Login Page.</div>
+    <div *ngIf="mode=='create'" class="account-form">
+      <div class="account-message">Create Identity</div>
+      <mat-form-field class="account-text">
+        <input matInput type="password" placeholder="Password" [(ngModel)]="password">
+      </mat-form-field>
+      <mat-form-field class="account-text">
+        <input matInput type="password" placeholder="Confirm Password" [(ngModel)]="confirm">
+      </mat-form-field>
+      <div class="account-control">
+        <button mat-raised-button class="account-button" color="primary" [disabled]="!isConfirmed()" 
+            (click)="onCreate()">Create</button>
+      </div>
+    </div>
+    <div *ngIf="mode=='reset'" class="account-form">
+      <div class="account-message">Reset Password</div>
+      <mat-form-field class="account-text">
+        <input matInput type="password" placeholder="Password" [(ngModel)]="password">
+      </mat-form-field>
+      <mat-form-field class="account-text">
+        <input matInput type="password" placeholder="Confirm Password" [(ngModel)]="confirm">
+      </mat-form-field>
+      <div class="account-control">
+        <button mat-raised-button class="account-button" color="primary" [disabled]="!isConfirmed()" 
+            (click)="onReset()">Reset</button>
+      </div>
+    </div>
+    <div *ngIf="mode=='login'" class="account-form">
+      <mat-form-field class="account-text">
+        <input matInput type="emial" placeholder="Username" spellcheck="false" [(ngModel)]="username">
+      </mat-form-field>
+      <mat-form-field class="account-text">
+        <input matInput type="password" placeholder="Password" [(ngModel)]="password">
+      </mat-form-field>
+      <div class="account-control">
+        <button mat-raised-button class="account-button" color="primary" [disabled]="!isReady()"
+            (click)="onLogin()">Login</button>
+      </div>
+    </div>
+  </div>
+  <mat-spinner *ngIf="busy" class="account-spinner"></mat-spinner>
+</div>
+
+<div class="account-profile" *ngIf="entry!=null">
+  <account-profile [emigo]="emigo" [entry]="entry"></account-profile>
+</div>
+
+<div class="footer">
+  <div class="row">
+    <div class="col-md-2"><a class="option" href="https://diatum.org/about/">About Diatum</a></div>
+    <div class="col-md-2"><a class="option" href="https://diatum.org/policies-introduction/">Policies</a></div>
+    <div class="col-md-2"><a class="option" href="https://diatum.org/developers/">Help</a></div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3 copyright">&copy; Copyright Diatum 2021</div>
+  </div>
+</div>

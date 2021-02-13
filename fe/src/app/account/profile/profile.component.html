@@ -1,0 +1,21 @@
+<div class="profile-container">
+  <div class="profile-title">Public Profile</div>
+  <div class="profile-form">
+    <div class="profile-logo">
+      <img #ico>
+    </div>
+    <div class="profile-details">
+      <div class="profile-handle">
+        <span *ngIf="getHandle()!=''">{{ getHandle() }}</span>
+        <span *ngIf="getHandle()==''" class="profile-placeholder">Username</span>
+        <i class="fa fa-pencil-square-o profile-icon" (click)="onUsername()"></i>
+      </div>
+      <div class="profile-name">{{ emigo.name }}</div>
+      <div class="profile-location">{{ emigo.location }}</div>
+      <div class="profile-description">{{ emigo.description }}</div>
+    </div>
+  </div>
+  <div class="profile-action">
+    <button mat-raised-button class="generate-button" (click)="onCode()">Attach App</button>
+  </div>
+</div>
