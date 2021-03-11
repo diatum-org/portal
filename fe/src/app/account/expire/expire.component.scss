@@ -1,19 +1,24 @@
 .expire-container {
+  padding: 8px;
   color: #444444;
 }
 
 .expire-close {
-  font-size: 16px;
-  top: -8px;
-  float: right;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: inline-block;
 }
 
-.expire-close-x {
-  cursor: pointer;
+.expire-header {
+  text-align: center;
+  font-size: 18px;
+  width: calc(100% - 32px);
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .expire-title {
-  text-align: left;
   font-size: 18px;
 }
 
@@ -30,6 +35,8 @@
 .expire-generate {
   width: 100%;
   text-align: center;
+  margin-top: 16px;
+  margin-bottom: 8px;
 }
 
 .expire-hours {
@@ -50,16 +57,16 @@
 }
 
 .expire-code {
-  font-size: 10px;
+  font-size: 18px;
   display: inline-block;
-  height: 20px;
-  background: #ffffcf;
+  height: 32px;
+  background: #BEE1FC;
   vertical-align: middle;
   margin-right: 16px;
-  border-radius: 2px;
-  border: 1px solid #dddddd;
+  border-radius: 16px;
   text-align: center;
   width: 128px;
+  padding-top: 6px;
 }
 
 .expire-nocopy {
@@ -70,13 +77,21 @@
 .expire-copy {
   cursor: pointer;
   width: 16px;
+  font-size: 18px;
+  vertical-align: middle;
   display: inline-block;
+}
+
+.expire-msg {
+  width: 100%;
+  text-align: center;
+  height: 20px;
 }
 
 .expire-note {
   width: 100%;
-  height: 24px;
   text-align: center;
+  padding: 16px;
 }
 
 .expire-copied {
@@ -85,9 +100,8 @@
   padding-left: 4px;
   padding-right: 4px;
   text-align: center;
-  font-size: 10px;
+  font-size: 12px;
   border-radius: 2px;
-  border: 1px solid #888888;
   display: inline-block;
   position: relative;
   left: 72px;

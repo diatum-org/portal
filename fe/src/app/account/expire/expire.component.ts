@@ -13,7 +13,7 @@ import { ServiceAccess } from '../serviceAccess';
 export class ExpireComponent implements OnInit {
 
   private entry: AccountEntry;
-  public expire: number = 5;
+  public expire: number = 60;
   public code: string;
   public copied: boolean = false;
 
@@ -26,9 +26,6 @@ export class ExpireComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  onGenerate() {
     let service: ServiceAccess = { enableShow: true, enableIdentity: true, enableProfile: true,
         enableGroup: true, enableShare: true, enablePrompt: true, enableService: true,
         enableIndex: true, enableUser: true, enableAccess: true, enableAccount: true, 

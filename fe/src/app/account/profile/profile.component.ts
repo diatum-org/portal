@@ -56,7 +56,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   public onCode() {
     let dialogRef: MatDialogRef<ExpireComponent> = this.dialog.open(ExpireComponent,
-        { width: '400px', data: this.entry });
+        { panelClass: 'expire-dialog', width: '300px', data: this.entry });
   }
 
   public onUsername() {

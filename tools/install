@@ -24,6 +24,9 @@ sudo mkdir /opt/diatum
 echo "enter a console login token:"
 read TOKEN
 
+echo "enter the default registry:"
+ready REGISTRY
+
 tar xf install.tar
 MAJOR=`cat major.version`
 MINOR=`cat minor.version`
@@ -64,6 +67,7 @@ mysql -u root -proot portal -e "insert into config (config_id, str_value) values
 mysql -u root -proot portal -e "insert into config (config_id, str_value) values ('server_version', '$VERSION')"
 mysql -u root -proot portal -e "insert into config (config_id, str_value) values ('config_console_token', '$TOKEN')"
 mysql -u root -proot portal -e "insert into config (config_id, str_value) values ('config_base_url', 'https://$NAME/app')"
+mysql -u root -proot portal -e "insert into config (config_id, str_value) values ('default_registry', '$REGISTRY')"
 
 crontab -r || true
 echo -e '*/15 * * * * bash /home/ubuntu/stat.sh\n5 5 * * * bash /home/ubuntu/synccert.sh"' | crontab
