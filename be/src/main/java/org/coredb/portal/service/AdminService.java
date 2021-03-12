@@ -85,6 +85,18 @@ public class AdminService {
   }
 
   @Transactional
+  public void setConfigRegistry(String registry) {
+
+    Config emigoRegistry = configRepository.findOneByConfigId(CONFIG_EMIGOREGISTRY);
+    if(emigoRegistry == null) {
+      emigoRegistry = new Config();
+      emigoRegistry.setConfigId(CONFIG_EMIGOREGISTRY);
+    }
+    emigoRegistry.setStrValue(registry);
+    configRepository.save(emigoRegistry); 
+  }
+
+  @Transactional
   public void setConfigNode(String node) {
 
     Config emigoNode = configRepository.findOneByConfigId(CONFIG_EMIGONODE);

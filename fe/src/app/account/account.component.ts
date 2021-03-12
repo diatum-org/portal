@@ -19,6 +19,7 @@ export class AccountComponent implements OnInit {
   public mode: string = null;
   public entry: AccountEntry = null;
   public username: string = "";
+  public defaultRegistry: string = null;
   public password: string = "";
   public confirm: string = "";
   public init: boolean = false;
@@ -32,6 +33,15 @@ export class AccountComponent implements OnInit {
       private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    
+    // get default registry
+    this.accountService.getDefaultRegistry().then(r => {
+      this.defaultRegistry = r;
+      console.log("default registry: " + r);
+    }).catch(err => {
+      console.log("failed to get default registry");
+    });
+
     this.route.queryParams.subscribe(params => {
       if(params.create != null) {
         this.token = params.create;
@@ -97,7 +107,7 @@ export class AccountComponent implements OnInit {
     if(this.busy) {
       return false;
     }
-    if(!this.username.includes("@")) {
+    if(this.defaultRegistry == null && !this.username.includes("@")) {
       return false;
     }
     if(this.username == "" || this.username == null) {
@@ -144,9 +154,19 @@ export class AccountComponent implements OnInit {
   }
 
   public onLogin() {
-    let name = this.username.split("@");
+    let name: string = "";
+    let registry: string = "";
+    if(this.username.includes("@")) {
+      let split = this.username.split("@");
+      name = split[0];
+      registry = split[1];
+    }
+    else {
+      name = this.username;
+      registry = this.defaultRegistry;
+    }
     this.busy = true;
-    this.accountService.getId("https://registry." + name[1] + "/app", name[0]).then(i => {
+    this.accountService.getId("https://registry." + registry + "/app", name).then(i => {
       this.accountService.getIdentity(i, this.password).then(e => {
         this.accountService.getEmigo(e).then(i => {
           this.emigo = i;

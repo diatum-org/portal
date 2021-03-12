@@ -98,6 +98,21 @@ public class AdminApiController implements AdminApi {
     }
   }
 
+    public ResponseEntity<Void> setPortalRegistry(@NotNull @ApiParam(value = "access token", required = true) @Valid @RequestParam(value = "token", required = true) String token,
+        @ApiParam(value = "portal registry", required = false) @Valid @RequestParam(value = "value", required = false) String value) {
+      try {
+        authService.accessToken(token);
+        adminService.setConfigRegistry(value);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+      }
+      catch(AccessDeniedException e) {
+        return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED); 
+      }
+      catch(Exception e) {
+        return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+    }
+    
     public ResponseEntity<Void> setPortalNode(@NotNull @ApiParam(value = "access token", required = true) @Valid @RequestParam(value = "token", required = true) String token,
         @ApiParam(value = "portal node", required = false) @Valid @RequestParam(value = "value", required = false) String value) {
       try {

@@ -272,6 +272,10 @@ public class AccountService {
     return entry;
   }
 
+  public String getRegistry() {
+    return configService.getStrValue(CONFIG_EMIGOREGISTRY, null);
+  }
+
   public AccountEntry getIdentity(String emigoId, String password) throws NotFoundException, AccessDeniedException, Exception {
 
     Account account = accountRepository.findOneByEmigoId(emigoId);

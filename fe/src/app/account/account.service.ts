@@ -53,6 +53,11 @@ export class AccountService {
     return this.httpClient.post<Pass>(entry.node + "/access/accounts/tokens?token=" + entry.token + "&expire=" + expire,
         service, { headers: this.headers, observe: 'body' }).toPromise();
   }
+
+  public getDefaultRegistry(): Promise<string> {
+    return this.httpClient.get<string>("account/registry", 
+        { headers: this.headers, observe: 'body' }).toPromise();
+  }
   
   public checkHandle(url: string, emigoId: string, handle: string): Promise<Result> {
     return this.httpClient.get<Result>(url + "/emigo/status?emigoId=" + emigoId + "&handle=" + handle,

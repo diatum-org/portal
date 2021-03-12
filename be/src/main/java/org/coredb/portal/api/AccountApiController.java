@@ -79,6 +79,17 @@ public class AccountApiController implements AccountApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
+    public ResponseEntity<String> getRegistry() {
+      try {
+        String registry = accountService.getRegistry();
+        return new ResponseEntity<String>("\"" + registry + "\"", HttpStatus.OK);
+      }
+      catch(Exception e) {
+        log.error(e.toString());
+        return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+    }
+
     public ResponseEntity<AccountEntry> getIdentity(@NotNull @ApiParam(value = "id of emigo to access", required = true) @Valid @RequestParam(value = "emigoId", required = true) String emigoId
 ,@NotNull @ApiParam(value = "password to use for login", required = true) @Valid @RequestParam(value = "password", required = true) String password
 ) {

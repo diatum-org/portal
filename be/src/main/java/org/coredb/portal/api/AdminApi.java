@@ -63,6 +63,18 @@ public interface AdminApi {
     ResponseEntity<PortalConfig> getConfig(@NotNull @ApiParam(value = "access token", required = true) @Valid @RequestParam(value = "token", required = true) String token);
 
 
+    @ApiOperation(value = "", nickname = "setPortalRegistry", notes = "Set default portal registry", tags={ "admin", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation"),
+        @ApiResponse(code = 403, message = "access denied"),
+        @ApiResponse(code = 500, message = "internal server error") })
+    @RequestMapping(value = "/admin/config/registry",
+        produces = { "application/json" },
+        method = RequestMethod.PUT)
+    ResponseEntity<Void> setPortalRegistry(@NotNull @ApiParam(value = "access token", required = true) @Valid @RequestParam(value = "token", required = true) String token,
+        @ApiParam(value = "portal registry", required = false) @Valid @RequestParam(value = "value", required = false) String value);
+
+
     @ApiOperation(value = "", nickname = "setPortalNode", notes = "Set node of portal identity", tags={ "admin", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "successful operation"),

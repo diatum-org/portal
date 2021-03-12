@@ -52,6 +52,15 @@ public interface AccountApi {
 );
 
 
+    @ApiOperation(value = "", nickname = "getRegistry", notes = "Default registry", response = String.class, tags={ "account", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "success") })
+    @RequestMapping(value = "/account/registry",
+        produces = { "application/json" }, 
+        method = RequestMethod.GET)
+    ResponseEntity<String> getRegistry();
+
+
     @ApiOperation(value = "", nickname = "getIdentity", notes = "Retrive account access token", response = AccountEntry.class, tags={ "account", })
     @ApiResponses(value = { 
         @ApiResponse(code = 201, message = "account created", response = AccountEntry.class),

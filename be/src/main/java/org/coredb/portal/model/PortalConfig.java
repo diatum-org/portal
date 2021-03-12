@@ -23,6 +23,9 @@ public class PortalConfig   {
   @JsonProperty("emigoNode")
   private String emigoNode = null;
 
+  @JsonProperty("defaultRegistry")
+  private String defaultRegistry = null;
+
   @JsonProperty("domains")
   @Valid
   private List<Domain> domains = null;
@@ -63,6 +66,24 @@ public class PortalConfig   {
     this.emigoNode = emigoNode;
   }
 
+  public PortalConfig defaultRegistry(String defaultRegistry) {
+    this.defaultRegistry = defaultRegistry;
+    return this;
+  }
+
+  /**
+   * Get defaultRegistry
+   * @return defaultRegistry
+   **/
+  
+    public String getDefaultRegistry() {
+    return defaultRegistry;
+  }
+
+  public void setDefaultRegistry(String defaultRegistry) {
+    this.defaultRegistry = defaultRegistry;
+  }
+
   public PortalConfig domains(List<Domain> domains) {
     this.domains = domains;
     return this;
@@ -101,12 +122,13 @@ public class PortalConfig   {
     PortalConfig portalConfig = (PortalConfig) o;
     return Objects.equals(this.emigoToken, portalConfig.emigoToken) &&
         Objects.equals(this.emigoNode, portalConfig.emigoNode) &&
+        Objects.equals(this.defaultRegistry, portalConfig.defaultRegistry) &&
         Objects.equals(this.domains, portalConfig.domains);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(emigoToken, emigoNode, domains);
+    return Objects.hash(emigoToken, emigoNode, defaultRegistry, domains);
   }
 
   @Override
@@ -116,6 +138,7 @@ public class PortalConfig   {
     
     sb.append("    emigoToken: ").append(toIndentedString(emigoToken)).append("\n");
     sb.append("    emigoNode: ").append(toIndentedString(emigoNode)).append("\n");
+    sb.append("    defaultRegistry: ").append(toIndentedString(defaultRegistry)).append("\n");
     sb.append("    domains: ").append(toIndentedString(domains)).append("\n");
     sb.append("}");
     return sb.toString();
