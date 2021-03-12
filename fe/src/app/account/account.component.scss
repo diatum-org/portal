@@ -1,5 +1,5 @@
 .account-entry {
-  top: calc(50vh - 222px);
+  top: max(1px - 1px, 50vh - 265px);
   color: #444444;
   padding: 16px;
   position: relative;
@@ -62,7 +62,7 @@
 .footer {
   position: fixed;
   left: 0;
-  bottom: 0;
+  bottom: min(1px - 1px, 100vh - 500px);
   width: 100%;
   background-color: white;
   color: #888888;

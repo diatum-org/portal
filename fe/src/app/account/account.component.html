@@ -35,10 +35,12 @@
     </div>
     <div *ngIf="mode=='login'" class="account-form">
       <mat-form-field class="account-text">
-        <input matInput type="emial" placeholder="Username" spellcheck="false" [(ngModel)]="username">
+        <input matInput type="email" placeholder="Username" spellcheck="false" 
+            (keydown.enter)="$event.target.blur()" [(ngModel)]="username">
       </mat-form-field>
       <mat-form-field class="account-text">
-        <input matInput type="password" placeholder="Password" [(ngModel)]="password">
+        <input matInput type="password" placeholder="Password"
+            (keydown.enter)="$event.target.blur()" [(ngModel)]="password">
       </mat-form-field>
       <div class="account-control">
         <button mat-raised-button class="account-button" color="primary" [disabled]="!isReady()"
