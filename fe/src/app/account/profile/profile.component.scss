@@ -14,7 +14,7 @@
 .profile-form {
   border-radius: 8px;
   padding: 16px;
-  max-width: 500px;
+  width: min(500px, 90vw);
   margin: 0 auto;
   background: #ffffff;
   overflow: hidden;

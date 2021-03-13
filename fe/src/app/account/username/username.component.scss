@@ -1,25 +1,33 @@
 .username-container {
+  padding-left: 8px;
+  padding-top: 8px;
+  padding-bottom: 16px;
+  padding-right: 8px;
   color: #444444;
 }
 
 .username-close {
-  font-size: 16px;
-  top: -8px;
-  float: right;
-}
-
-.username-close-x {
+  width: 32px;
+  height: 32px;
   cursor: pointer;
+  display: inline-block;
+  vertical-align: bottom;
 }
 
 .username-title {
-  text-align: left;
   font-size: 18px;
-  color: #777777;
+}
+
+.username-header {
+  text-align: center;
+  font-size: 18px;
+  width: calc(100% - 64px);
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .username-buttons {
-  text-align: right;
+  text-align: center;
 }
 
 .username-button {
@@ -36,25 +44,26 @@
 .username-fields {
   text-align: center;
   padding-top: 16px;
+  width: 100%;
+  margin: 0;
 }
 
 .username-text {
-  display: inline-block;
-  width: 200px;
+  width: 100%;
 }
 
 .username-at {
   display: inline-block;
   font-size: 18px;
   text-align: center;
-  width: 36px;
+  padding: 8px;
 }
 
 .username-alert {
   color: red;
   text-align: center;
-  height: 24px;
+  height: 16px;
   position: relative;
-  top: -8px;
+  top: -4px;
 }
 

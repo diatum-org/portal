@@ -18,14 +18,17 @@ export class AccountComponent implements OnInit {
 
   public mode: string = null;
   public entry: AccountEntry = null;
-  public username: string = "";
   public defaultRegistry: string = null;
   public password: string = "";
+  public username: string = "";
+  public registry: string = "";
   public confirm: string = "";
   public init: boolean = false;
   private token: string;
   public busy: boolean = false;
   public emigo: Emigo;
+  public passwordType: string = "password";
+  public confirmType: string = "password";
 
   constructor(private dialog: MatDialog, 
       private accountService: AccountService,
@@ -119,6 +122,14 @@ export class AccountComponent implements OnInit {
     return true;
   }
 
+  public setPasswordType(t: string) {
+    this.passwordType = t;
+  }
+
+  public setConfirmType(t: string) {
+    this.confirmType = t;
+  }
+
   public onCreate() {
     this.busy = true;
     this.accountService.createIdentity(this.token, this.password).then(e => {
@@ -126,6 +137,10 @@ export class AccountComponent implements OnInit {
         this.emigo = i;
         this.entry = e;
         this.busy = false;
+        this.username = i.name;
+        if(i.registry.length >= 21 && i.registry.startsWith("https://registry.") && i.registry.endsWith("/app")) {
+          this.registry = i.registry.substring(17, i.registry.length - 4);
+        } 
       }).catch(err => {
         window.alert("failed to retrieve account");
         this.busy = false;
@@ -134,6 +149,13 @@ export class AccountComponent implements OnInit {
       window.alert("create identity failed");
       this.busy = false;
     });
+  }
+
+  public onSave() {
+  }
+
+  public isAvailable(): boolean {
+    return true;
   }
 
   public onReset() {

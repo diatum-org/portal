@@ -6,9 +6,8 @@
 }
 
 .account-profile {
-  top: calc(50vh - 280px);
+  top: max(1px - 1px, 50vh - 285px);
   color: #444444;
-  padding: 16px;
   position: relative;
 }
 
@@ -21,12 +20,38 @@
 .account-message {
   font-size: 16px;
   text-align: center;
-  padding-bottom: 16px;
 }
 
 .account-redirect {
   font-size: 12px;
   text-align: center;
+}
+
+.account-option {
+  display: inline-block;
+  float: right;
+  position: absolute;
+}
+
+.account-eye {
+  width: 24px;
+  position: relative;
+  left: -24px;
+  top: 16px;
+  cursor: pointer;
+}
+
+.account-username {
+  display: inline-block;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.account-password {
+  display: inline-block;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .account-text {
@@ -35,10 +60,34 @@
   text-align: center;
 }
 
+.account-label {
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 8px;
+}
+
+.account-info {
+  font-size: 16px;
+}
+
+.account-img {
+  margin: 0 auto;
+  display: block;
+  width: min(200px, 50vw);
+  padding: 16px;
+}
+
+.account-create {
+  padding: 16px;
+  max-width: 500px;
+  margin: 0 auto;
+  min-height: calc(100vh - 108px);
+}
+
 .account-form {
   border-radius: 8px;
   padding: 16px;
-  max-width: 500px;
+  width: min(500px, 100% - 32px);
   margin: 0 auto;
   background: #ffffff;
   overflow: hidden;
@@ -59,10 +108,25 @@
   opacity: 0.5;
 }
 
+.account-busy {
+  display: inline;
+  position: relative;
+  left: calc(50% - 50px);
+  top: 16px;
+}
+
+.base {
+  width: 100%;
+  background-color: white;
+  color: #888888;
+  padding: 8px;
+  text-align: center;
+}
+
 .footer {
   position: fixed;
   left: 0;
-  bottom: min(1px - 1px, 100vh - 500px);
+  bottom: min(1px - 1px, 100vh - 512px);
   width: 100%;
   background-color: white;
   color: #888888;
@@ -80,6 +144,12 @@
 
 .header {
   background-color: white;
+}
+
+.spacer {
+  height: 8px;
+  margin: 0 auto;
+  opacity: 0.5;
 }
 
 .logo {
