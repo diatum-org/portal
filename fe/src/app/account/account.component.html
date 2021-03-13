@@ -37,25 +37,39 @@
     <img class="account-img" src="assets/locked.png">
   </div>
   <div *ngIf="entry!=null" class="account-create">
-    <div class="account-label">Perfect. Now choose a username for our community.</div>
-    <div class="account-info">The username is used to attach your Diatabase to apps and helps people find you in the public directory. The registry is the public directory where your username will be listed.</div>
-    <mat-spinner *ngIf="busy" class="account-busy"></mat-spinner>
-    <div class="spacer"></div>
-    <div class="account-form">
-      <mat-form-field class="account-username">
-        <input matInput type="email" placeholder="Username"
-            (keydown.enter)="$event.target.blur()" [(ngModel)]="username">
-      </mat-form-field>
-      <mat-form-field class="account-username">
-        <input matInput type="email" placeholder="Registry"
-            (keydown.enter)="$event.target.blur()" [(ngModel)]="registry">
-      </mat-form-field>
-      <div class="account-control">
-        <button mat-raised-button class="account-button" color="primary" [disabled]="!isAvailable()" 
-            (click)="onSave()">Save Username</button>
+    <div *ngIf="!hasUsername()">
+      <div class="account-label">Perfect. Now choose a username for our community.</div>
+      <div class="account-info">The username is used to attach your Diatabase to apps and helps people find you in the public directory. The registry is the public directory where your username will be listed.</div>
+      <mat-spinner *ngIf="busy" class="account-busy"></mat-spinner>
+      <div class="spacer"></div>
+      <div class="account-form">
+        <mat-form-field class="account-username">
+          <input matInput type="email" placeholder="Username" (keydown)="onUsername()" spellcheck="false"
+              (keydown.enter)="$event.target.blur()" [(ngModel)]="username">
+        </mat-form-field>
+        <mat-form-field class="account-username">
+          <input matInput type="email" placeholder="Registry" (keydown)="onUsername()" spellcheck="false"
+              (keydown.enter)="$event.target.blur()" [(ngModel)]="registry">
+        </mat-form-field>
+        <div class="account-control">
+          <button mat-raised-button class="account-button" color="primary" [disabled]="!available" 
+              (click)="onSave()">Save Username</button>
+        </div>
       </div>
+      <img class="account-img" src="assets/locked.png">
     </div>
-    <img class="account-img" src="assets/locked.png">
+    <div *ngIf="hasUsername()">
+      <div class="account-label">Okay, now we need some apps!.</div>
+      <div class="account-info">In out system, apps need to attach to your Database to have access to your data, including your contacts, photos and videos.</div>
+      <img class="account-attach" src="assets/attach.png">
+      <div class="account-inst">To attach an app:</div>
+      <div class="account-info">1. Generate a code below and copy it to your clipboard</div>
+      <div class="account-info">2. Open the app and enter your username in the login screen</div>
+      <div class="account-info">3. Paste the attachment code in the login screen</div>
+    </div>
+    <div class="account-action">
+      <button mat-raised-button class="generate-button" (click)="onCode()">Attach App</button>
+    </div>
   </div>
 </div>
 

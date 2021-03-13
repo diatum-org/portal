@@ -5,6 +5,7 @@ import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { ExpireComponent } from './expire/expire.component';
 import { AccountService } from './account.service';
 import { AccountEntry } from './accountEntry';
 import { Emigo } from './emigo';
@@ -29,6 +30,10 @@ export class AccountComponent implements OnInit {
   public emigo: Emigo;
   public passwordType: string = "password";
   public confirmType: string = "password";
+  public available: boolean = false;
+  public alert: boolean = false;
+  private counter: number = 0;
+  private debounce: number = null;
 
   constructor(private dialog: MatDialog, 
       private accountService: AccountService,
@@ -152,9 +157,78 @@ export class AccountComponent implements OnInit {
   }
 
   public onSave() {
+    this.busy = true;
+    this.accountService.setHandle(this.entry, this.username).then(m => {
+      let reg = "https://registry." + this.registry + "/app";
+      this.accountService.setRegistry(this.entry, reg).then(m => {
+        this.accountService.setMessage(reg, m).then(() => {
+          this.busy = false;
+          this.emigo.handle = this.username;
+          this.emigo.registry = reg;
+        }).catch(err => {
+          this.busy = false;
+          window.alert("failed to update registry");
+        });
+      }).catch(err => {
+        this.busy = false;
+        window.alert("failed to set registry");
+      });
+    }).catch(err => {
+      this.busy = false;
+      window.alert("failed to set username");
+    });
   }
 
-  public isAvailable(): boolean {
+  public onCode() {
+    let dialogRef: MatDialogRef<ExpireComponent> = this.dialog.open(ExpireComponent,
+        { width: '300px', data: this.entry });
+  }
+
+  onUsername() {
+    this.available = false;
+    this.alert = false;
+    this.counter ++;
+    let cur: number = this.counter;
+    if(this.debounce != null) {
+      clearTimeout(this.debounce);
+    }
+
+    // dont save empty username
+    if(this.username == null || this.username == '') {
+      return;
+    }
+    if(this.registry == null || this.registry == '') {
+      return;
+    }
+
+    // save username
+    this.debounce = setTimeout(() => {
+      this.debounce = null;
+      this.accountService.checkHandle("https://registry." + this.registry + "/app", this.emigo.emigoId, 
+          this.username).then(r => {
+        if(this.counter == cur) {
+          if(r.boolValue) {
+            this.available = true;
+            this.alert = false;
+          }
+          else {
+            this.available = false;
+            this.alert = true;
+          }
+        }
+      }).catch(err => {
+        if(this.counter == cur) {
+          this.available = false;
+          this.alert = true;
+        }
+      });
+    }, 1000);
+  }
+
+  hasUsername() {
+    if(this.emigo == null || this.emigo.handle == null) {
+      return false;
+    }
     return true;
   }
 

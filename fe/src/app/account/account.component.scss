@@ -60,6 +60,12 @@
   text-align: center;
 }
 
+.account-inst {
+  font-size: 16px;
+  font-weight: bold;
+  padding-bottom: 4px;
+}
+
 .account-label {
   font-size: 18px;
   font-weight: bold;
@@ -68,6 +74,13 @@
 
 .account-info {
   font-size: 16px;
+}
+
+.account-attach {
+  margin: 0 auto;
+  display: block;
+  width: min(300px, 75vw);
+  padding: 16px;
 }
 
 .account-img {
@@ -155,5 +168,15 @@
 .logo {
   height: 72px;
   padding: 8px;
+}
+
+.account-action {
+  padding-top: 16px;
+  text-align: center;
+}
+
+.generate-button {
+  background: #387CA5;
+  color: #ffffff;
 }
   
