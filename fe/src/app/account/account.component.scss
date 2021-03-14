@@ -27,6 +27,15 @@
   text-align: center;
 }
 
+.account-alert {
+  height: 20px;
+  color: red;
+  font-size: 14px;
+  position: relative;
+  top: -8px;
+  text-align: center;
+}
+
 .account-option {
   display: inline-block;
   float: right;
@@ -117,7 +126,7 @@
 .account-spinner {
   margin: 0 auto;
   position: relative;
-  top: -156px;
+  top: -200px;
   opacity: 0.5;
 }
 

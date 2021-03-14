@@ -1,5 +1,6 @@
 .expire-container {
   color: #444444;
+  padding: 16px;
 }
 
 .expire-close {
@@ -51,14 +52,14 @@
 .expire-url {
   font-size: 10px;
   display: inline-block;
-  height: 20px;
-  background: #ffffcf;
+  height: 24px;
+  padding-top: 1px;
+  background: #BEE1FC;
   vertical-align: top;
   margin-right: 16px;
-  border-radius: 2px;
-  border: 1px solid #dddddd;
+  border-radius: 12px;
   text-align: center;
-  width: calc(100% - 32px);
+  width: calc(100% - 48px);
 }
 
 .expire-nocopy {
@@ -68,8 +69,9 @@
 
 .expire-copy {
   cursor: pointer;
-  width: 16px;
+  width: 18px;
   display: inline-block;
+  vertical-align: middle;
 }
 
 .expire-note {
@@ -80,13 +82,11 @@
 
 .expire-copied {
   position: relative;
-  left: 12px;
   padding-left: 4px;
-  padding-right: 4px;
+  padding-right: 24px;
   text-align: center;
   font-size: 10px;
   border-radius: 2px;
-  border: 1px solid #888888;
   display: inline-block;
 }
 

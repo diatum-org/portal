@@ -51,6 +51,9 @@
           <input matInput type="email" placeholder="Registry" (keydown)="onUsername()" spellcheck="false"
               (keydown.enter)="$event.target.blur()" [(ngModel)]="registry">
         </mat-form-field>
+        <div class="account-alert">
+          <span *ngIf="alert">Sorry, the username is not available</span>
+        </div>
         <div class="account-control">
           <button mat-raised-button class="account-button" color="primary" [disabled]="!available" 
               (click)="onSave()">Save Username</button>
@@ -66,9 +69,9 @@
       <div class="account-info">1. Generate a code below and copy it to your clipboard</div>
       <div class="account-info">2. Open the app and enter your username in the login screen</div>
       <div class="account-info">3. Paste the attachment code in the login screen</div>
-    </div>
-    <div class="account-action">
-      <button mat-raised-button class="generate-button" (click)="onCode()">Attach App</button>
+      <div class="account-action">
+        <button mat-raised-button class="generate-button" (click)="onCode()">Attach App</button>
+      </div>
     </div>
   </div>
 </div>

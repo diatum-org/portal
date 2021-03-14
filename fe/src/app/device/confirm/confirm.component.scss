@@ -1,5 +1,6 @@
 .confirm-container {
   color: #444444;
+  padding: 16px;
 }
 
 .confirm-close {
@@ -13,18 +14,20 @@
 }
 
 .confirm-message {
-  text-align: left;
+  text-align: center;
   font-size: 16px;
   color: #777777;
 }
 
 .confirm-buttons {
   padding-top: 16px;
-  text-align: right;
+  text-align: center;
 }
 
 .confirm-button {
   margin-left: 16px;
+  color: #ffffff;
+  background: #387ca5;
 }
 
 .confirm-space {

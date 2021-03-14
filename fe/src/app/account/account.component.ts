@@ -146,6 +146,7 @@ export class AccountComponent implements OnInit {
         if(i.registry.length >= 21 && i.registry.startsWith("https://registry.") && i.registry.endsWith("/app")) {
           this.registry = i.registry.substring(17, i.registry.length - 4);
         } 
+        window.scrollTo(0,0);
       }).catch(err => {
         window.alert("failed to retrieve account");
         this.busy = false;
@@ -165,6 +166,7 @@ export class AccountComponent implements OnInit {
           this.busy = false;
           this.emigo.handle = this.username;
           this.emigo.registry = reg;
+          window.scrollTo(0,0);
         }).catch(err => {
           this.busy = false;
           window.alert("failed to update registry");

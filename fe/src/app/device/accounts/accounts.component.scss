@@ -14,13 +14,16 @@
   cursor: pointer;
 }
 
+.accounts-container {
+  padding: 16px;
+}
+
 .accounts-data {
   padding: 16px;
   overflow: auto;
   border: 1px solid #eeeeee;
   border-radius: 4px;
   height: 450px;
-  width: calc(100% - 32px);
   color: #808080;
 }
 
