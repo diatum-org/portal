@@ -40,11 +40,16 @@ export class ConsoleService {
     return this.httpClient.put<void>("admin/config/node?token=" + token + "&value=" + encodeURIComponent(n),
         { headers: this.headers, observe: 'body' }).toPromise();
   }
+
   public updateToken(token: string, t: string): Promise<void> {
     return this.httpClient.put<void>("admin/config/token?token=" + token + "&value=" + encodeURIComponent(t),
         { headers: this.headers, observe: 'body' }).toPromise();
   }
 
+  public updateRegistry(token: string, r: string): Promise<void> {
+    return this.httpClient.put<void>("admin/config/registry?token=" + token + "&value=" + encodeURIComponent(r),
+        { headers: this.headers, observe: 'body' }).toPromise();
+  }
 
 }
 

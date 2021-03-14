@@ -71,6 +71,9 @@ public class AdminService {
       if(config.getConfigId().equals(CONFIG_EMIGOTOKEN)) {
         portalConfig.setEmigoToken(config.getStrValue());
       }
+      if(config.getConfigId().equals(CONFIG_EMIGOREGISTRY)) {
+        portalConfig.setDefaultRegistry(config.getStrValue());
+      }
     }
 
     // retreive domains

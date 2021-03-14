@@ -1,9 +1,3 @@
-<div class="config-control">
-  <div class="config-close">
-    <i class="fa fa-times config-close-x" (click)="onClose()"></i>
-  </div>
-</div>
-
 <div *ngIf="configSet" class="config-data">
   <div class="config-row">
     <mat-form-field class="config-node">
@@ -13,12 +7,21 @@
     <div class="config-icon">
       <i *ngIf="nodeSet" class="fa fa-floppy-o config-check" (click)="onSaveNode()"></i>
     </div>
+
     <mat-form-field class="config-token">
       <mat-label>Emigo Token</mat-label>
       <input matInput [(ngModel)]="config.emigoToken" (change)="onToken()" spellcheck=false>
     </mat-form-field>
     <div class="config-icon">
       <i *ngIf="tokenSet" class="fa fa-floppy-o config-check" (click)="onSaveToken()"></i>
+    </div>
+
+    <mat-form-field class="config-registry">
+      <mat-label>Default Registry</mat-label>
+      <input matInput [(ngModel)]="config.defaultRegistry" (change)="onRegistry()" spellcheck=false>
+    </mat-form-field>
+    <div class="config-icon">
+      <i *ngIf="registrySet" class="fa fa-floppy-o config-check" (click)="onSaveRegistry()"></i>
     </div>
   </div>
 </div>

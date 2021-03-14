@@ -14,6 +14,7 @@ export class ConfigComponent implements OnInit {
 
   public nodeSet: boolean = false;
   public tokenSet: boolean = false;
+  public registrySet: boolean = false;
   private ids: Set<number>;
   private token: string = null;
   public configSet: boolean = false;
@@ -53,6 +54,10 @@ export class ConfigComponent implements OnInit {
     this.tokenSet = true;
   }
 
+  public onRegistry() {
+    this.registrySet = true;
+  }
+
   public isSet(id: number): boolean {
     return this.ids.has(id);
   }
@@ -68,6 +73,15 @@ export class ConfigComponent implements OnInit {
     }).catch(err => {
       console.log(err);
       window.alert("failed to update node");
+    });
+  }
+
+  public onSaveRegistry() {
+    this.consoleService.updateRegistry(this.token, this.config.defaultRegistry).then(() => {
+      this.registrySet = false;
+    }).catch(err => {
+      console.log(err);
+      window.alert("failed to update registry");
     });
   }
 

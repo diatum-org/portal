@@ -138,7 +138,7 @@ export class ConsoleComponent implements OnInit {
 
   onConfig() {
     let dialogRef: MatDialogRef<ConfigComponent> = this.dialog.open(ConfigComponent,
-        { position: { left: 'calc(50% - 600px)' }, width: '1200px', data: this.token});
+        { width: '1200px', data: this.token});
   }
 
   onMode(m: string) {

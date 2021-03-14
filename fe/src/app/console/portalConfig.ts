@@ -14,5 +14,6 @@ import { Domain } from './domain';
 export interface PortalConfig { 
     emigoToken?: string;
     emigoNode?: string;
+    defaultRegistry?: string;
     domains?: Array<Domain>;
 }
