@@ -145,6 +145,9 @@ export class AccountComponent implements OnInit {
         this.username = i.name;
         if(i.registry.length >= 21 && i.registry.startsWith("https://registry.") && i.registry.endsWith("/app")) {
           this.registry = i.registry.substring(17, i.registry.length - 4);
+        }
+        else {
+          this.registry = this.defaultRegistry;
         } 
         window.scrollTo(0,0);
       }).catch(err => {

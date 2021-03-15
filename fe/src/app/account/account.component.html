@@ -5,10 +5,11 @@
 <div *ngIf="mode=='create'">
   <div *ngIf="entry==null" class="account-create">
     <div class="account-label">Welcome!</div>
-    <div class="account-info">The Diatabase is created by Diatum, a nonprofit with a mssion to give you ownership and control of your data and privacy. Your Diatabase provides you with storage space to upload, store, and access your contacts, photos, videos and other data used in integrated apps.</div>
+    <div class="account-info">A Diatabase is your personal storage space to upload, store and access your contacts, photos, videos, and other data used with our community of apps.</div>
+    <div class="account-info">The Diatabase software was created by Diatum, a nonprofit with a mission to give you ownership and control of your data and privacy, and is hosted by the sender of this link.</div>
     <img class="account-img" src="assets/unlocked.png">
     <div class="account-label">Let's get started.</div>
-    <div class="account-info">First we need to create your personal Diatabase; be sure to give it a strong password.</div>
+    <div class="account-info">First we need to create your personal Diatabase. Be sure to give it a strong password.</div>
     <mat-spinner *ngIf="busy" class="account-busy"></mat-spinner>
     <div class="spacer"></div>
     <div class="account-form">
@@ -47,10 +48,6 @@
           <input matInput type="email" placeholder="Username" (keydown)="onUsername()" spellcheck="false"
               (keydown.enter)="$event.target.blur()" [(ngModel)]="username">
         </mat-form-field>
-        <mat-form-field class="account-username">
-          <input matInput type="email" placeholder="Registry" (keydown)="onUsername()" spellcheck="false"
-              (keydown.enter)="$event.target.blur()" [(ngModel)]="registry">
-        </mat-form-field>
         <div class="account-alert">
           <span *ngIf="alert">Sorry, the username is not available</span>
         </div>
@@ -62,13 +59,22 @@
       <img class="account-img" src="assets/locked.png">
     </div>
     <div *ngIf="hasUsername()">
-      <div class="account-label">Okay, now we need some apps!.</div>
-      <div class="account-info">In out system, apps need to attach to your Database to have access to your data, including your contacts, photos and videos.</div>
+      <div class="account-label">Okay, now we need some apps!</div>
+      <div class="account-info">In our system, apps need to attach to your Diatabase to have access to your data, including your contacts, photos and videos.</div>
       <img class="account-attach" src="assets/attach.png">
       <div class="account-inst">To attach an app:</div>
-      <div class="account-info">1. Generate a code below and copy it to your clipboard</div>
-      <div class="account-info">2. Open the app and enter your username in the login screen</div>
-      <div class="account-info">3. Paste the attachment code in the login screen</div>
+      <div class="account-info">
+        <div class="account-num">1.</div>
+        <div class="account-item">Generate a code below and copy it to your clipboard.</div>
+      </div>
+      <div class="account-info">
+        <div class="account-num">2.</div>
+        <div class="account-item">Open the app and enter your username in the login screen.</div>
+      </div>
+      <div class="account-info">
+        <div class="account-num">3.</div>
+        <div class="account-item">Paste the attachment code in the login screen.</div>
+      </div>
       <div class="account-action">
         <button mat-raised-button class="generate-button" (click)="onCode()">Attach App</button>
       </div>
