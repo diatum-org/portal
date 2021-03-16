@@ -227,7 +227,7 @@ export class AccountComponent implements OnInit {
           this.alert = true;
         }
       });
-    }, 1000);
+    }, 500);
   }
 
   hasUsername() {
