@@ -18,7 +18,8 @@ export class DeviceService {
   }
 
   public getEntry(login: string, password: string): Promise<DeviceEntry> {
-    return this.httpClient.get<DeviceEntry>("device?login=" + login + "&password=" + password,
+    let p: string = encodeURIComponent(password);
+    return this.httpClient.get<DeviceEntry>("device?login=" + login + "&password=" + p,
         { headers: this.headers, observe: 'body' }).toPromise();
   }
 
@@ -38,7 +39,8 @@ export class DeviceService {
   }
 
   public addAccount(login: string, password: string, expire: number): Promise<string> {
-    return this.httpClient.post<string>("device/accounts?login=" + login + "&password=" + password + "&expire=" + expire,
+    let p: string = encodeURIComponent(password);
+    return this.httpClient.post<string>("device/accounts?login=" + login + "&password=" + p + "&expire=" + expire,
         { headers: this.headers, observe: 'body' }).toPromise();
   }
 
@@ -48,7 +50,8 @@ export class DeviceService {
   }
 
   public resetAccount(login: string, password: string, expire: number, emigoId: string): Promise<string> {
-    return this.httpClient.put<string>("device/accounts?login=" + login + "&password=" + password + "&expire=" + expire + "&emigoId=" + emigoId,
+    let p: string = encodeURIComponent(password);
+    return this.httpClient.put<string>("device/accounts?login=" + login + "&password=" + p + "&expire=" + expire + "&emigoId=" + emigoId,
         { headers: this.headers, observe: 'body' }).toPromise();
   }
 
