@@ -25,7 +25,7 @@ echo "enter a console login token:"
 read TOKEN
 
 echo "enter the default registry:"
-ready REGISTRY
+read REGISTRY
 
 tar xf install.tar
 MAJOR=`cat major.version`
