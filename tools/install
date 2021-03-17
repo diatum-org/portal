@@ -70,7 +70,7 @@ mysql -u root -proot portal -e "insert into config (config_id, str_value) values
 mysql -u root -proot portal -e "insert into config (config_id, str_value) values ('default_registry', '$REGISTRY')"
 
 crontab -r || true
-echo -e '*/15 * * * * bash /home/ubuntu/stat.sh\n5 5 * * * bash /home/ubuntu/synccert.sh"' | crontab
+echo -e '*/15 * * * * bash /home/ubuntu/stat.sh\n5 5 * * * bash /home/ubuntu/synccert.sh\n4 4 * * * back /home/ubuntu/backup.sh' | crontab
 
 sudo bash /home/ubuntu/renew.sh
 
