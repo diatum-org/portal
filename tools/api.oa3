@@ -3,7 +3,7 @@ openapi: 3.0.0
 info:
   description:
     Portal for registering and maintaining digital identity nodes
-      emigo-id - hex encoded sha256 of an emigo 4096 public key
+      amigo-id - hex encoded sha256 of an amigo 4096 public key
       secure-token - hex encoded 256 bit random number
 
   version: 1.0.4
@@ -94,7 +94,7 @@ paths:
             type: string
         - name: value
           in: query
-          description: updated emigo node
+          description: updated amigo node
           required: false
           schema:
             type: string
@@ -121,7 +121,7 @@ paths:
             type: string
         - name: value
           in: query
-          description: updated emigo token
+          description: updated amigo token
           required: false
           schema:
             type: string
@@ -509,12 +509,12 @@ paths:
           schema:
             type: integer
             format: int32
-        - name: emigoId
+        - name: amigoId
           in: query
           description: id to reset
           schema:
             type: string
-            format: emigo-id
+            format: amigo-id
       responses:
         '200':
           description: ok
@@ -594,13 +594,13 @@ paths:
       description: Retrive account access token
       operationId: get-identity
       parameters:
-        - name: emigoId
+        - name: amigoId
           in: query
-          description: id of emigo to access
+          description: id of amigo to access
           required: true
           schema:
             type: string
-            format: emigo-id
+            format: amigo-id
         - name: password
           in: query
           description: password to use for login
@@ -640,13 +640,13 @@ paths:
       description: Change account password
       operationId: change-password
       parameters:
-        - name: emigoId
+        - name: amigoId
           in: query
-          description: id of emigo to access
+          description: id of amigo to access
           required: true
           schema:
             type: string
-            format: emigo-id
+            format: amigo-id
         - name: current
           in: query
           description: current password to use for login
@@ -761,9 +761,9 @@ components:
     PortalConfig:
       type: object
       properties:
-        emigoToken:
+        amigoToken:
           type: string
-        emigoNode:
+        amigoNode:
           type: string
         defaultRegistry:
           type: string
@@ -790,19 +790,19 @@ components:
         enabled:
           type: boolean
 
-    EmigoToken:
+    AmigoToken:
       type: object
       required:
-        - emigoId
-        - emigo
+        - amigoId
+        - amigo
         - signature
         - token
       properties:
-        emigoId:
+        amigoId:
           type: string
-          format: emigo-id
-        emigo:
-          $ref: '#/components/schemas/EmigoMessage'
+          format: amigo-id
+        amigo:
+          $ref: '#/components/schemas/AmigoMessage'
         signature:
           type: string
           format: signature
@@ -810,7 +810,7 @@ components:
           type: string
           format: Base64 & JSON serialized string of token
 
-    EmigoMessage:
+    AmigoMessage:
       type: object
       required:
         - key
@@ -820,7 +820,7 @@ components:
       properties:
         key:
           type: string
-          format: emigo-key
+          format: amigo-key
         keyType:
           type: string
         signature:
@@ -833,12 +833,12 @@ components:
     LinkMessage:
       type: object
       required:
-        - emigo
+        - amigo
         - signature
         - link
       properties:
-        emigo:
-          $ref: '#/components/schemas/EmigoMessage'
+        amigo:
+          $ref: '#/components/schemas/AmigoMessage'
         signature:
           type: string
           format: signature
@@ -882,11 +882,11 @@ components:
     UserEntry:
       type: object
       required:
-        - emigo
+        - amigo
         - data
       properties:
-        emigo:
-          $ref: '#/components/schemas/Emigo'
+        amigo:
+          $ref: '#/components/schemas/Amigo'
         data:
           $ref: '#/components/schemas/UserEntryData'
 
@@ -906,17 +906,17 @@ components:
           type: string
           format: secure-token
 
-    Emigo:
+    Amigo:
       type: object
       required:
-        - emigoId
+        - amigoId
         - node
         - revision
         - version
       properties:
-        emigoId:
+        amigoId:
           type: string
-          format: emigoId
+          format: amigoId
         name:
           type: string
         description:

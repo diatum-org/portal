@@ -23,7 +23,7 @@ import org.springframework.web.client.RestClientException;
 import org.coredb.portal.model.ServiceAccess;
 import org.coredb.portal.model.LinkMessage;
 import org.coredb.portal.model.UserEntry;
-import org.coredb.portal.model.EmigoToken;
+import org.coredb.portal.model.AmigoToken;
 
 import org.coredb.portal.model.AccountEntry;
 
@@ -124,21 +124,21 @@ public class AccountService {
 
     // post for emigo token
     HttpEntity<LinkMessage> linkMessage = new HttpEntity<LinkMessage>(link, headers);
-    EmigoToken emigo;
+    AmigoToken emigo;
     try {
-      emigo = rest.postForObject(emigoUrl, linkMessage, EmigoToken.class);
+      emigo = rest.postForObject(emigoUrl, linkMessage, AmigoToken.class);
     }
     catch(Exception e) {
       // give request another chance
       System.out.println(e.toString());
-      emigo = rest.postForObject(emigoUrl, linkMessage, EmigoToken.class);
+      emigo = rest.postForObject(emigoUrl, linkMessage, AmigoToken.class);
     }
 
     // construct user url
     String userUrl = emigoNode + "/access/services/tokens?token=" + nodeToken;
 
     // post for user entry
-    HttpEntity<EmigoToken> emigoToken = new HttpEntity<EmigoToken>(emigo, headers);
+    HttpEntity<AmigoToken> emigoToken = new HttpEntity<AmigoToken>(emigo, headers);
     UserEntry user;
     try {
       user = rest.postForObject(userUrl, emigoToken, UserEntry.class);
@@ -154,12 +154,12 @@ public class AccountService {
     String pass = Password.prepare(password, salt);
 
     // create new account enntry
-    Account account = accountRepository.findOneByEmigoId(emigo.getEmigoId());
+    Account account = accountRepository.findOneByEmigoId(emigo.getAmigoId());
     if(account == null) {
       account = new Account();
     }
     account.setDevice(device);
-    account.setEmigoId(emigo.getEmigoId());
+    account.setEmigoId(emigo.getAmigoId());
     account.setPassword(pass);
     account.setSalt(salt);
     account.setCreated(cur);
@@ -222,22 +222,22 @@ public class AccountService {
 
     // post for emigo token
     HttpEntity<LinkMessage> linkMessage = new HttpEntity<LinkMessage>(link, headers);
-    ResponseEntity<EmigoToken> response;
+    ResponseEntity<AmigoToken> response;
     try {
-      response = rest.exchange(emigoUrl, HttpMethod.PUT, linkMessage, EmigoToken.class);
+      response = rest.exchange(emigoUrl, HttpMethod.PUT, linkMessage, AmigoToken.class);
     }
     catch(Exception e) {
       // give request another chance
       System.out.println(e.toString());
-      response = rest.exchange(emigoUrl, HttpMethod.PUT, linkMessage, EmigoToken.class);
+      response = rest.exchange(emigoUrl, HttpMethod.PUT, linkMessage, AmigoToken.class);
     }
-    EmigoToken emigo = response.getBody();
+    AmigoToken emigo = response.getBody();
 
     // construct user url
     String userUrl = emigoNode + "/access/services/tokens?token=" + nodeToken;
 
     // post for user entry
-    HttpEntity<EmigoToken> emigoToken = new HttpEntity<EmigoToken>(emigo, headers);
+    HttpEntity<AmigoToken> emigoToken = new HttpEntity<AmigoToken>(emigo, headers);
     UserEntry user;
     try {
       user = rest.postForObject(userUrl, emigoToken, UserEntry.class);
@@ -253,12 +253,12 @@ public class AccountService {
     String pass = Password.prepare(password, salt);
 
     // create new account enntry
-    Account account = accountRepository.findOneByEmigoId(emigo.getEmigoId());
+    Account account = accountRepository.findOneByEmigoId(emigo.getAmigoId());
     if(account == null) {
       account = new Account();
     }
     account.setDevice(device);
-    account.setEmigoId(emigo.getEmigoId());
+    account.setEmigoId(emigo.getAmigoId());
     account.setPassword(pass);
     account.setSalt(salt);
     account.setCreated(cur);

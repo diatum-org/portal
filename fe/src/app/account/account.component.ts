@@ -8,7 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ExpireComponent } from './expire/expire.component';
 import { AccountService } from './account.service';
 import { AccountEntry } from './accountEntry';
-import { Emigo } from './emigo';
+import { Amigo } from './amigo';
 
 @Component({
   selector: 'app-account',
@@ -27,7 +27,7 @@ export class AccountComponent implements OnInit {
   public init: boolean = false;
   private token: string;
   public busy: boolean = false;
-  public emigo: Emigo;
+  public amigo: Amigo;
   public passwordType: string = "password";
   public confirmType: string = "password";
   public available: boolean = false;
@@ -138,8 +138,8 @@ export class AccountComponent implements OnInit {
   public onCreate() {
     this.busy = true;
     this.accountService.createIdentity(this.token, this.password).then(e => {
-      this.accountService.getEmigo(e).then(i => {
-        this.emigo = i;
+      this.accountService.getAmigo(e).then(i => {
+        this.amigo = i;
         this.entry = e;
         this.busy = false;
         this.username = i.name;
@@ -167,8 +167,8 @@ export class AccountComponent implements OnInit {
       this.accountService.setRegistry(this.entry, reg).then(m => {
         this.accountService.setMessage(reg, m).then(() => {
           this.busy = false;
-          this.emigo.handle = this.username;
-          this.emigo.registry = reg;
+          this.amigo.handle = this.username;
+          this.amigo.registry = reg;
           window.scrollTo(0,0);
         }).catch(err => {
           this.busy = false;
@@ -209,7 +209,7 @@ export class AccountComponent implements OnInit {
     // save username
     this.debounce = setTimeout(() => {
       this.debounce = null;
-      this.accountService.checkHandle("https://registry." + this.registry + "/app", this.emigo.emigoId, 
+      this.accountService.checkHandle("https://registry." + this.registry + "/app", this.amigo.amigoId, 
           this.username).then(r => {
         if(this.counter == cur) {
           if(r.boolValue) {
@@ -231,7 +231,7 @@ export class AccountComponent implements OnInit {
   }
 
   hasUsername() {
-    if(this.emigo == null || this.emigo.handle == null) {
+    if(this.amigo == null || this.amigo.handle == null) {
       return false;
     }
     return true;
@@ -240,8 +240,8 @@ export class AccountComponent implements OnInit {
   public onReset() {
     this.busy = true;
     this.accountService.setIdentity(this.token, this.password).then(e => {
-      this.accountService.getEmigo(e).then(i => {
-        this.emigo = i;
+      this.accountService.getAmigo(e).then(i => {
+        this.amigo = i;
         this.entry = e;
         this.busy = false;
       }).catch(err => {
@@ -269,8 +269,8 @@ export class AccountComponent implements OnInit {
     this.busy = true;
     this.accountService.getId("https://registry." + registry + "/app", name).then(i => {
       this.accountService.getIdentity(i, this.password).then(e => {
-        this.accountService.getEmigo(e).then(i => {
-          this.emigo = i;
+        this.accountService.getAmigo(e).then(i => {
+          this.amigo = i;
           this.entry = e;
           this.busy = false;
         }).catch(err => {

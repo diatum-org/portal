@@ -10,6 +10,9 @@
  * Do not edit the class manually.
  */
 
-export interface Pass { 
-    data?: string;
+export interface AmigoMessage { 
+    key: string;
+    keyType: string;
+    signature: string;
+    data: string;
 }

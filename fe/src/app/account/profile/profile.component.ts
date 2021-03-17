@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { Emigo } from '../emigo';
+import { Amigo } from '../amigo';
 import { AccountEntry } from '../accountEntry';
 import { AccountService } from '../account.service';
 import { ExpireComponent } from '../expire/expire.component';
@@ -14,7 +14,7 @@ import { UsernameComponent } from '../username/username.component';
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
 
-  @Input('emigo') public emigo: Emigo;
+  @Input('amigo') public amigo: Amigo;
   @Input('entry') public entry: AccountEntry;
 
   @ViewChild('ico', {static:false}) private icon: ElementRef<any>;
@@ -28,11 +28,11 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
 
-    if(this.emigo == null || this.emigo.logo == null || this.emigo.logo.length == 0) {
+    if(this.amigo == null || this.amigo.logo == null || this.amigo.logo.length == 0) {
       this.icon.nativeElement.src = "assets/avatar.png";
     }
     else {
-      this.icon.nativeElement.src = "data:image/png;base64," + this.emigo.logo;
+      this.icon.nativeElement.src = "data:image/png;base64," + this.amigo.logo;
     }
     this.icon.nativeElement.width = 128;
     this.icon.nativeElement.height = 128;
@@ -41,13 +41,13 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public getHandle(): string {
     
     let handle: string = "";
-    if(this.emigo != null) {
-      if(this.emigo.handle != null) {
-        handle += this.emigo.handle;
+    if(this.amigo != null) {
+      if(this.amigo.handle != null) {
+        handle += this.amigo.handle;
       }
-      if(this.emigo.registry != null) {
-        if(this.emigo.registry.startsWith("https://registry.") && this.emigo.registry.endsWith("/app")) {
-          handle += "@" + this.emigo.registry.substr(17, this.emigo.registry.length-21);
+      if(this.amigo.registry != null) {
+        if(this.amigo.registry.startsWith("https://registry.") && this.amigo.registry.endsWith("/app")) {
+          handle += "@" + this.amigo.registry.substr(17, this.amigo.registry.length-21);
         }
       }
     }
@@ -62,7 +62,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   public onUsername() {
     let dialogRef: MatDialogRef<UsernameComponent> = this.dialog.open(UsernameComponent,
         { width: 'min(500px, 90vw)',
-        data: { entry: this.entry, emigo: this.emigo } });
+        data: { entry: this.entry, amigo: this.amigo } });
   }
   
 }

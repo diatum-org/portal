@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { AccountService } from '../account.service';
 import { AccountEntry } from '../accountEntry';
-import { Emigo } from '../emigo';
+import { Amigo } from '../amigo';
 
 @Component({
   selector: 'device-username',
@@ -14,7 +14,7 @@ export class UsernameComponent implements OnInit {
 
   public handle: string;
   public registry: string;
-  private emigo: Emigo;
+  private amigo: Amigo;
   private entry: AccountEntry;
   public disabled: boolean = true;
   public alert: boolean = false;
@@ -26,13 +26,13 @@ export class UsernameComponent implements OnInit {
       private dialog: MatDialogRef<UsernameComponent>,
       @Inject(MAT_DIALOG_DATA) private data: any
   ) {
-    this.emigo = JSON.parse(JSON.stringify(data.emigo));
+    this.amigo = JSON.parse(JSON.stringify(data.amigo));
     this.entry = data.entry;
 
-    this.handle = this.emigo.handle;
-    if(this.emigo.registry != null) {
-      if(this.emigo.registry.startsWith("https://registry.") && this.emigo.registry.endsWith("/app")) {
-        this.registry = this.emigo.registry.substr(17, this.emigo.registry.length-21);
+    this.handle = this.amigo.handle;
+    if(this.amigo.registry != null) {
+      if(this.amigo.registry.startsWith("https://registry.") && this.amigo.registry.endsWith("/app")) {
+        this.registry = this.amigo.registry.substr(17, this.amigo.registry.length-21);
       }
     }
   }
@@ -43,12 +43,12 @@ export class UsernameComponent implements OnInit {
 
   onSave() {
     if((this.handle == '' || this.handle == null) && (this.registry == '' || this.registry == null)) {
-      this.emigo.handle = null;
-      this.emigo.registry = null;
+      this.amigo.handle = null;
+      this.amigo.registry = null;
       this.accountService.setHandle(this.entry, null).then(m => {
         this.accountService.setRegistry(this.entry, null).then(m => {
-          this.data.emigo.handle = null;
-          this.data.emigo.registry = null;
+          this.data.amigo.handle = null;
+          this.data.amigo.registry = null;
           this.dialog.close();
         }).catch(err => {
           window.alert("failed to set registry");
@@ -58,14 +58,14 @@ export class UsernameComponent implements OnInit {
       });
     }
     else {
-      this.emigo.handle = this.handle;
-      this.emigo.registry = "https://registry." + this.registry + "/app";
+      this.amigo.handle = this.handle;
+      this.amigo.registry = "https://registry." + this.registry + "/app";
     }
-    this.accountService.setHandle(this.entry, this.emigo.handle).then(m => {
-      this.accountService.setRegistry(this.entry, this.emigo.registry).then(m => {
-        this.data.emigo.handle = this.emigo.handle;
-        this.data.emigo.registry = this.emigo.registry;
-        this.accountService.setMessage(this.emigo.registry, m).then(() => {
+    this.accountService.setHandle(this.entry, this.amigo.handle).then(m => {
+      this.accountService.setRegistry(this.entry, this.amigo.registry).then(m => {
+        this.data.amigo.handle = this.amigo.handle;
+        this.data.amigo.registry = this.amigo.registry;
+        this.accountService.setMessage(this.amigo.registry, m).then(() => {
           this.dialog.close();
         }).catch(err => {
           window.alert("failed to update registry");
@@ -100,7 +100,7 @@ export class UsernameComponent implements OnInit {
     else {
       this.debounce = setTimeout(() => {
         this.debounce = null;
-        this.accountService.checkHandle("https://registry." + this.registry + "/app", this.emigo.emigoId, this.handle).then(r => {
+        this.accountService.checkHandle("https://registry." + this.registry + "/app", this.amigo.amigoId, this.handle).then(r => {
           if(this.counter == cur) {
             if(r.boolValue == true) {
               this.disabled = false;

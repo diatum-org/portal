@@ -46,7 +46,7 @@ public interface AccountApi {
         @ApiResponse(code = 500, message = "internal server error") })
     @RequestMapping(value = "/account/password",
         method = RequestMethod.PUT)
-    ResponseEntity<Void> changePassword(@NotNull @ApiParam(value = "id of emigo to access", required = true) @Valid @RequestParam(value = "emigoId", required = true) String emigoId
+    ResponseEntity<Void> changePassword(@NotNull @ApiParam(value = "id of amigo to access", required = true) @Valid @RequestParam(value = "amigoId", required = true) String amigoId
 ,@NotNull @ApiParam(value = "current password to use for login", required = true) @Valid @RequestParam(value = "current", required = true) String current
 ,@NotNull @ApiParam(value = "next password to use for login", required = true) @Valid @RequestParam(value = "next", required = true) String next
 );
@@ -69,7 +69,7 @@ public interface AccountApi {
     @RequestMapping(value = "/account/identity",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<AccountEntry> getIdentity(@NotNull @ApiParam(value = "id of emigo to access", required = true) @Valid @RequestParam(value = "emigoId", required = true) String emigoId
+    ResponseEntity<AccountEntry> getIdentity(@NotNull @ApiParam(value = "id of amigo to access", required = true) @Valid @RequestParam(value = "amigoId", required = true) String amigoId
 ,@NotNull @ApiParam(value = "password to use for login", required = true) @Valid @RequestParam(value = "password", required = true) String password
 );
 

@@ -4,10 +4,10 @@ import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent } from '@a
 import { HttpUrlEncodingCodec } from '@angular/common/http';
 
 import { AccountEntry } from './accountEntry';
-import { Emigo } from './emigo';
+import { Amigo } from './amigo';
 import { Pass } from './pass';
 import { Result } from './result';
-import { EmigoMessage } from './emigoMessage';
+import { AmigoMessage } from './amigoMessage';
 import { ServiceAccess } from './serviceAccess';
 
 @Injectable()
@@ -35,17 +35,17 @@ export class AccountService {
   }
 
   public getId(url: string, handle: string): Promise<string> {
-    return this.httpClient.get<string>(url + "/emigo/id?handle=" + handle + "&wrap=true",
+    return this.httpClient.get<string>(url + "/amigo/id?handle=" + handle + "&wrap=true",
         { headers: this.headers, observe: 'body' }).toPromise();
   }
 
   public getIdentity(id: string, password: string): Promise<AccountEntry> {
-    return this.httpClient.get<AccountEntry>("account/identity?emigoId=" + id + "&password=" + password,
+    return this.httpClient.get<AccountEntry>("account/identity?amigoId=" + id + "&password=" + password,
         { headers: this.headers, observe: 'body' }).toPromise();
   }
 
-  public getEmigo(entry: AccountEntry): Promise<Emigo> {
-    return this.httpClient.get<Emigo>(entry.node + "/identity?token=" + entry.token,
+  public getAmigo(entry: AccountEntry): Promise<Amigo> {
+    return this.httpClient.get<Amigo>(entry.node + "/identity?token=" + entry.token,
         { headers: this.headers, observe: 'body' }).toPromise();
   }
 
@@ -59,23 +59,23 @@ export class AccountService {
         { headers: this.headers, observe: 'body' }).toPromise();
   }
   
-  public checkHandle(url: string, emigoId: string, handle: string): Promise<Result> {
-    return this.httpClient.get<Result>(url + "/emigo/status?emigoId=" + emigoId + "&handle=" + handle,
+  public checkHandle(url: string, amigoId: string, handle: string): Promise<Result> {
+    return this.httpClient.get<Result>(url + "/amigo/status?amigoId=" + amigoId + "&handle=" + handle,
         { headers: this.headers, observe: 'body' }).toPromise();
   }
 
-  public setHandle(entry: AccountEntry, handle: string): Promise<EmigoMessage> {
-    return this.httpClient.put<EmigoMessage>(entry.node + "/identity/handle?token=" + entry.token,
+  public setHandle(entry: AccountEntry, handle: string): Promise<AmigoMessage> {
+    return this.httpClient.put<AmigoMessage>(entry.node + "/identity/handle?token=" + entry.token,
         handle, { headers: this.headers, observe: 'body' }).toPromise();
   }
 
-  public setRegistry(entry: AccountEntry, registry: string): Promise<EmigoMessage> {
-    return this.httpClient.put<EmigoMessage>(entry.node + "/identity/registry?token=" + entry.token,
+  public setRegistry(entry: AccountEntry, registry: string): Promise<AmigoMessage> {
+    return this.httpClient.put<AmigoMessage>(entry.node + "/identity/registry?token=" + entry.token,
         registry, { headers: this.headers, observe: 'body' }).toPromise();
   }
 
-  public setMessage(url: string, msg: EmigoMessage): Promise<void> {
-    return this.httpClient.post<void>(url + "/emigo/messages",
+  public setMessage(url: string, msg: AmigoMessage): Promise<void> {
+    return this.httpClient.post<void>(url + "/amigo/messages",
         msg, { headers: this.headers, observe: 'body' }).toPromise();
   }
 

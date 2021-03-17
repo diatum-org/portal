@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.coredb.portal.model.EmigoMessage;
+import org.coredb.portal.model.AmigoMessage;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -15,8 +15,8 @@ import javax.validation.constraints.*;
  */
 @Validated
 public class LinkMessage   {
-  @JsonProperty("emigo")
-  private EmigoMessage emigo = null;
+  @JsonProperty("amigo")
+  private AmigoMessage amigo = null;
 
   @JsonProperty("signature")
   private String signature = null;
@@ -27,25 +27,25 @@ public class LinkMessage   {
   @JsonProperty("attach")
   private String attach = null;
 
-  public LinkMessage emigo(EmigoMessage emigo) {
-    this.emigo = emigo;
+  public LinkMessage amigo(AmigoMessage amigo) {
+    this.amigo = amigo;
     return this;
   }
 
   /**
-   * Get emigo
-   * @return emigo
+   * Get amigo
+   * @return amigo
   **/
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
   @Valid
-  public EmigoMessage getEmigo() {
-    return emigo;
+  public AmigoMessage getAmigo() {
+    return amigo;
   }
 
-  public void setEmigo(EmigoMessage emigo) {
-    this.emigo = emigo;
+  public void setAmigo(AmigoMessage amigo) {
+    this.amigo = amigo;
   }
 
   public LinkMessage signature(String signature) {
@@ -116,7 +116,7 @@ public class LinkMessage   {
       return false;
     }
     LinkMessage linkMessage = (LinkMessage) o;
-    return Objects.equals(this.emigo, linkMessage.emigo) &&
+    return Objects.equals(this.amigo, linkMessage.amigo) &&
         Objects.equals(this.signature, linkMessage.signature) &&
         Objects.equals(this.create, linkMessage.create) &&
         Objects.equals(this.attach, linkMessage.attach);
@@ -124,7 +124,7 @@ public class LinkMessage   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(emigo, signature, create, attach);
+    return Objects.hash(amigo, signature, create, attach);
   }
 
   @Override
@@ -132,7 +132,7 @@ public class LinkMessage   {
     StringBuilder sb = new StringBuilder();
     sb.append("class LinkMessage {\n");
     
-    sb.append("    emigo: ").append(toIndentedString(emigo)).append("\n");
+    sb.append("    amigo: ").append(toIndentedString(amigo)).append("\n");
     sb.append("    signature: ").append(toIndentedString(signature)).append("\n");
     sb.append("    create: ").append(toIndentedString(create)).append("\n");
     sb.append("    attach: ").append(toIndentedString(attach)).append("\n");

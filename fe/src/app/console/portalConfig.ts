@@ -1,6 +1,6 @@
 /**
  * Device Portal API
- * Portal for registering and maintaining digital identity nodes emigo-id - hex encoded sha256 of an emigo 4096 public key secure-token - hex encoded 256 bit random number
+ * Portal for registering and maintaining digital identity nodes amigo-id - hex encoded sha256 of an amigo 4096 public key secure-token - hex encoded 256 bit random number
  *
  * OpenAPI spec version: 1.0.4
  * Contact: rolandosborne@diatum.org
@@ -12,8 +12,8 @@
 import { Domain } from './domain';
 
 export interface PortalConfig { 
-    emigoToken?: string;
-    emigoNode?: string;
+    amigoToken?: string;
+    amigoNode?: string;
     defaultRegistry?: string;
     domains?: Array<Domain>;
 }

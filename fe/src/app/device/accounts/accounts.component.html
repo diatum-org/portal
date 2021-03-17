@@ -7,10 +7,10 @@
       </div>
     </div>
     <div *ngFor="let i of accounts" class="accounts-entry">
-      <div class="accounts-name">{{ getAccountName(i.emigoId) }}</div>
+      <div class="accounts-name">{{ getAccountName(i.amigoId) }}</div>
       <div class="accounts-options">
-        <i class="fa fa-sign-in accounts-reset" (click)="onReset(i.emigoId)"></i>
-        <i class="fa fa-times accounts-remove" (click)="onDelete(i.emigoId)"></i>
+        <i class="fa fa-sign-in accounts-reset" (click)="onReset(i.amigoId)"></i>
+        <i class="fa fa-times accounts-remove" (click)="onDelete(i.amigoId)"></i>
       </div>
     </div>
   </div>

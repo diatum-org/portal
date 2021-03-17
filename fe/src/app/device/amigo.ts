@@ -10,6 +10,15 @@
  * Do not edit the class manually.
  */
 
-export interface Pass { 
-    data?: string;
+export interface Amigo { 
+    amigoId: string;
+    name?: string;
+    description?: string;
+    logo?: string;
+    location?: string;
+    node: string;
+    registry?: string;
+    revision: number;
+    version: string;
+    handle?: string;
 }

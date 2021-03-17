@@ -17,11 +17,11 @@ import javax.validation.constraints.*;
 
 
 public class PortalConfig   {
-  @JsonProperty("emigoToken")
-  private String emigoToken = null;
+  @JsonProperty("amigoToken")
+  private String amigoToken = null;
 
-  @JsonProperty("emigoNode")
-  private String emigoNode = null;
+  @JsonProperty("amigoNode")
+  private String amigoNode = null;
 
   @JsonProperty("defaultRegistry")
   private String defaultRegistry = null;
@@ -30,40 +30,40 @@ public class PortalConfig   {
   @Valid
   private List<Domain> domains = null;
 
-  public PortalConfig emigoToken(String emigoToken) {
-    this.emigoToken = emigoToken;
+  public PortalConfig amigoToken(String amigoToken) {
+    this.amigoToken = amigoToken;
     return this;
   }
 
   /**
-   * Get emigoToken
-   * @return emigoToken
+   * Get amigoToken
+   * @return amigoToken
    **/
   
-    public String getEmigoToken() {
-    return emigoToken;
+    public String getAmigoToken() {
+    return amigoToken;
   }
 
-  public void setEmigoToken(String emigoToken) {
-    this.emigoToken = emigoToken;
+  public void setAmigoToken(String amigoToken) {
+    this.amigoToken = amigoToken;
   }
 
-  public PortalConfig emigoNode(String emigoNode) {
-    this.emigoNode = emigoNode;
+  public PortalConfig amigoNode(String amigoNode) {
+    this.amigoNode = amigoNode;
     return this;
   }
 
   /**
-   * Get emigoNode
-   * @return emigoNode
+   * Get amigoNode
+   * @return amigoNode
    **/
   
-    public String getEmigoNode() {
-    return emigoNode;
+    public String getAmigoNode() {
+    return amigoNode;
   }
 
-  public void setEmigoNode(String emigoNode) {
-    this.emigoNode = emigoNode;
+  public void setAmigoNode(String amigoNode) {
+    this.amigoNode = amigoNode;
   }
 
   public PortalConfig defaultRegistry(String defaultRegistry) {
@@ -120,15 +120,15 @@ public class PortalConfig   {
       return false;
     }
     PortalConfig portalConfig = (PortalConfig) o;
-    return Objects.equals(this.emigoToken, portalConfig.emigoToken) &&
-        Objects.equals(this.emigoNode, portalConfig.emigoNode) &&
+    return Objects.equals(this.amigoToken, portalConfig.amigoToken) &&
+        Objects.equals(this.amigoNode, portalConfig.amigoNode) &&
         Objects.equals(this.defaultRegistry, portalConfig.defaultRegistry) &&
         Objects.equals(this.domains, portalConfig.domains);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(emigoToken, emigoNode, defaultRegistry, domains);
+    return Objects.hash(amigoToken, amigoNode, defaultRegistry, domains);
   }
 
   @Override
@@ -136,8 +136,8 @@ public class PortalConfig   {
     StringBuilder sb = new StringBuilder();
     sb.append("class PortalConfig {\n");
     
-    sb.append("    emigoToken: ").append(toIndentedString(emigoToken)).append("\n");
-    sb.append("    emigoNode: ").append(toIndentedString(emigoNode)).append("\n");
+    sb.append("    amigoToken: ").append(toIndentedString(amigoToken)).append("\n");
+    sb.append("    amigoNode: ").append(toIndentedString(amigoNode)).append("\n");
     sb.append("    defaultRegistry: ").append(toIndentedString(defaultRegistry)).append("\n");
     sb.append("    domains: ").append(toIndentedString(domains)).append("\n");
     sb.append("}");

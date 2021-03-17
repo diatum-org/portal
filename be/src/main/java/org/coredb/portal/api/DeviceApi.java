@@ -114,7 +114,7 @@ public interface DeviceApi {
     ResponseEntity<String> resetAccount(@NotNull @ApiParam(value = "user password", required = true) @Valid @RequestParam(value = "password", required = true) String password
 ,@NotNull @ApiParam(value = "expire seconds", required = true) @Valid @RequestParam(value = "expire", required = true) Integer expire
 ,@ApiParam(value = "user login") @Valid @RequestParam(value = "login", required = false) String login
-,@ApiParam(value = "id to reset") @Valid @RequestParam(value = "emigoId", required = false) String emigoId
+,@ApiParam(value = "id to reset") @Valid @RequestParam(value = "amigoId", required = false) String amigoId
 );
 
 

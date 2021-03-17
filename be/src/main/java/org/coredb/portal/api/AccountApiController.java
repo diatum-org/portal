@@ -72,7 +72,7 @@ public class AccountApiController implements AccountApi {
       }
     }
 
-    public ResponseEntity<Void> changePassword(@NotNull @ApiParam(value = "id of emigo to access", required = true) @Valid @RequestParam(value = "emigoId", required = true) String emigoId
+    public ResponseEntity<Void> changePassword(@NotNull @ApiParam(value = "id of amigo to access", required = true) @Valid @RequestParam(value = "amigoId", required = true) String amigoId
 ,@NotNull @ApiParam(value = "current password to use for login", required = true) @Valid @RequestParam(value = "current", required = true) String current
 ,@NotNull @ApiParam(value = "next password to use for login", required = true) @Valid @RequestParam(value = "next", required = true) String next
 ) {
@@ -90,11 +90,11 @@ public class AccountApiController implements AccountApi {
       }
     }
 
-    public ResponseEntity<AccountEntry> getIdentity(@NotNull @ApiParam(value = "id of emigo to access", required = true) @Valid @RequestParam(value = "emigoId", required = true) String emigoId
+    public ResponseEntity<AccountEntry> getIdentity(@NotNull @ApiParam(value = "id of amigo to access", required = true) @Valid @RequestParam(value = "amigoId", required = true) String amigoId
 ,@NotNull @ApiParam(value = "password to use for login", required = true) @Valid @RequestParam(value = "password", required = true) String password
 ) {
       try {
-        AccountEntry entry = accountService.getIdentity(emigoId, password);
+        AccountEntry entry = accountService.getIdentity(amigoId, password);
         return new ResponseEntity<AccountEntry>(entry, HttpStatus.OK);
       }
       catch(NotFoundException e) {

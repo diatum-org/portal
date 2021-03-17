@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent } from '@angular/common/http';
 import { HttpUrlEncodingCodec } from '@angular/common/http';
 
-import { Emigo } from './emigo';
+import { Amigo } from './amigo';
 import { DeviceEntry } from './deviceEntry';
 import { SystemStat } from './systemStat';
 import { AccountEntry } from './accountEntry';
@@ -33,8 +33,8 @@ export class DeviceService {
         { headers: this.headers, observe: 'body' }).toPromise();
   }
 
-  public getIdentity(url: string, token: string, emigoId: string): Promise<Emigo> {
-    return this.httpClient.get<Emigo>(url + "/admin/accounts/" + emigoId + "?token=" + token,
+  public getIdentity(url: string, token: string, amigoId: string): Promise<Amigo> {
+    return this.httpClient.get<Amigo>(url + "/admin/accounts/" + amigoId + "?token=" + token,
         { headers: this.headers, observe: 'body' }).toPromise();
   }
 
@@ -49,9 +49,9 @@ export class DeviceService {
         { headers: this.headers, observe: 'body' }).toPromise();
   }
 
-  public resetAccount(login: string, password: string, expire: number, emigoId: string): Promise<string> {
+  public resetAccount(login: string, password: string, expire: number, amigoId: string): Promise<string> {
     let p: string = encodeURIComponent(password);
-    return this.httpClient.put<string>("device/accounts?login=" + login + "&password=" + p + "&expire=" + expire + "&emigoId=" + emigoId,
+    return this.httpClient.put<string>("device/accounts?login=" + login + "&password=" + p + "&expire=" + expire + "&amigoId=" + amigoId,
         { headers: this.headers, observe: 'body' }).toPromise();
   }
 

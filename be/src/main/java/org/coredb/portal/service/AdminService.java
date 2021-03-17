@@ -66,10 +66,10 @@ public class AdminService {
     List<Config> configs = configRepository.findAll();
     for(Config config: configs) {
       if(config.getConfigId().equals(CONFIG_EMIGONODE)) {
-        portalConfig.setEmigoNode(config.getStrValue());
+        portalConfig.setAmigoNode(config.getStrValue());
       }
       if(config.getConfigId().equals(CONFIG_EMIGOTOKEN)) {
-        portalConfig.setEmigoToken(config.getStrValue());
+        portalConfig.setAmigoToken(config.getStrValue());
       }
       if(config.getConfigId().equals(CONFIG_EMIGOREGISTRY)) {
         portalConfig.setDefaultRegistry(config.getStrValue());

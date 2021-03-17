@@ -1,5 +1,5 @@
 /**
- * Digital Archive Emigo App Server API
+ * Digital Archive Amigo App Server API
  * An interface to a for managing the database nodes
  *
  * OpenAPI spec version: 1.0.4

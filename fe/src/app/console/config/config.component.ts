@@ -18,7 +18,7 @@ export class ConfigComponent implements OnInit {
   private ids: Set<number>;
   private token: string = null;
   public configSet: boolean = false;
-  public config: PortalConfig = { emigoToken: "", emigoNode: "" };
+  public config: PortalConfig = { amigoToken: "", amigoNode: "" };
 
   constructor(private consoleService: ConsoleService,
       private dialog: MatDialog,
@@ -68,7 +68,7 @@ export class ConfigComponent implements OnInit {
   }
 
   public onSaveNode() {
-    this.consoleService.updateNode(this.token, this.config.emigoNode).then(() => {
+    this.consoleService.updateNode(this.token, this.config.amigoNode).then(() => {
       this.nodeSet = false;
     }).catch(err => {
       console.log(err);
@@ -86,7 +86,7 @@ export class ConfigComponent implements OnInit {
   }
 
   public onSaveToken() {
-    this.consoleService.updateToken(this.token, this.config.emigoToken).then(() => {
+    this.consoleService.updateToken(this.token, this.config.amigoToken).then(() => {
       this.tokenSet = false;
     }).catch(err => {
       console.log(err);

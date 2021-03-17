@@ -5,7 +5,7 @@ import { ConfirmComponent } from '../confirm/confirm.component';
 import { ExpireComponent } from '../expire/expire.component';
 import { DeviceService } from '../device.service';
 import { AccountEntry } from '../accountEntry';
-import { Emigo } from '../emigo';
+import { Amigo } from '../amigo';
 
 @Component({
   selector: 'device-accounts',
@@ -19,13 +19,13 @@ export class AccountsComponent implements OnInit {
   private password: string;
   private token: string;
   public accounts: AccountEntry[] = [];
-  private entries: Map<string, Emigo>;
+  private entries: Map<string, Amigo>;
 
   constructor(private deviceService: DeviceService,
       private dialog: MatDialog,
       private dialogRef: MatDialogRef<AccountsComponent>,
       @Inject(MAT_DIALOG_DATA) private data: any) {
-    this.entries = new Map<string, Emigo>(); 
+    this.entries = new Map<string, Amigo>(); 
     this.node = data.node;
     this.login = data.login;
     this.password = data.password;
@@ -46,8 +46,8 @@ export class AccountsComponent implements OnInit {
 
       if(a.length <= 128) {
         for(let i = 0; i < a.length; i++) {
-          this.deviceService.getIdentity(this.node, this.token, a[i].emigoId).then(e => {
-            this.entries.set(a[i].emigoId, e);
+          this.deviceService.getIdentity(this.node, this.token, a[i].amigoId).then(e => {
+            this.entries.set(a[i].amigoId, e);
           }).catch(err => {
             window.alert("failed to retrieve account");
           });
@@ -61,11 +61,11 @@ export class AccountsComponent implements OnInit {
   public getAccountName(id): string {
     let name: string = null;
     if(this.entries.has(id)) {
-      let emigo: Emigo = this.entries.get(id);
-      if(emigo != null) {
-        if(emigo.registry != null && emigo.handle != null) {
-          if(emigo.registry.startsWith("https://registry.") && emigo.registry.endsWith("/app")) {
-            name = emigo.handle + "@" + emigo.registry.substr(17, emigo.registry.length-21);
+      let amigo: Amigo = this.entries.get(id);
+      if(amigo != null) {
+        if(amigo.registry != null && amigo.handle != null) {
+          if(amigo.registry.startsWith("https://registry.") && amigo.registry.endsWith("/app")) {
+            name = amigo.handle + "@" + amigo.registry.substr(17, amigo.registry.length-21);
           }
         }
       }
@@ -79,13 +79,13 @@ export class AccountsComponent implements OnInit {
   public onAdd() {
     let dialogRef: MatDialogRef<ExpireComponent> = this.dialog.open(ExpireComponent,
       { position: { left: 'calc(50% - 300px)' }, width: '600px', 
-      data: { mode: 'create', login: this.login, password: this.password, emigoId: null }});
+      data: { mode: 'create', login: this.login, password: this.password, amigoId: null }});
   } 
 
   public onReset(id: string) {
     let dialogRef: MatDialogRef<ExpireComponent> = this.dialog.open(ExpireComponent,
       { position: { left: 'calc(50% - 300px)' }, width: '600px', 
-      data: { mode: 'reset', login: this.login, password: this.password, emigoId: id }});
+      data: { mode: 'reset', login: this.login, password: this.password, amigoId: id }});
   }
 
   public onEdit(id: string) {

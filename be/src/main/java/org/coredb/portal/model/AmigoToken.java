@@ -5,21 +5,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.coredb.portal.model.EmigoMessage;
+import org.coredb.portal.model.AmigoMessage;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * EmigoToken
+ * AmigoToken
  */
 @Validated
-public class EmigoToken   {
-  @JsonProperty("emigoId")
-  private String emigoId = null;
+public class AmigoToken   {
+  @JsonProperty("amigoId")
+  private String amigoId = null;
 
-  @JsonProperty("emigo")
-  private EmigoMessage emigo = null;
+  @JsonProperty("amigo")
+  private AmigoMessage amigo = null;
 
   @JsonProperty("signature")
   private String signature = null;
@@ -27,48 +27,48 @@ public class EmigoToken   {
   @JsonProperty("token")
   private String token = null;
 
-  public EmigoToken emigoId(String emigoId) {
-    this.emigoId = emigoId;
+  public AmigoToken amigoId(String amigoId) {
+    this.amigoId = amigoId;
     return this;
   }
 
   /**
-   * Get emigoId
-   * @return emigoId
+   * Get amigoId
+   * @return amigoId
   **/
   @ApiModelProperty(required = true, value = "")
       @NotNull
 
-    public String getEmigoId() {
-    return emigoId;
+    public String getAmigoId() {
+    return amigoId;
   }
 
-  public void setEmigoId(String emigoId) {
-    this.emigoId = emigoId;
+  public void setAmigoId(String amigoId) {
+    this.amigoId = amigoId;
   }
 
-  public EmigoToken emigo(EmigoMessage emigo) {
-    this.emigo = emigo;
+  public AmigoToken amigo(AmigoMessage amigo) {
+    this.amigo = amigo;
     return this;
   }
 
   /**
-   * Get emigo
-   * @return emigo
+   * Get amigo
+   * @return amigo
   **/
   @ApiModelProperty(required = true, value = "")
       @NotNull
 
     @Valid
-    public EmigoMessage getEmigo() {
-    return emigo;
+    public AmigoMessage getAmigo() {
+    return amigo;
   }
 
-  public void setEmigo(EmigoMessage emigo) {
-    this.emigo = emigo;
+  public void setAmigo(AmigoMessage amigo) {
+    this.amigo = amigo;
   }
 
-  public EmigoToken signature(String signature) {
+  public AmigoToken signature(String signature) {
     this.signature = signature;
     return this;
   }
@@ -88,7 +88,7 @@ public class EmigoToken   {
     this.signature = signature;
   }
 
-  public EmigoToken token(String token) {
+  public AmigoToken token(String token) {
     this.token = token;
     return this;
   }
@@ -117,25 +117,25 @@ public class EmigoToken   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    EmigoToken emigoToken = (EmigoToken) o;
-    return Objects.equals(this.emigoId, emigoToken.emigoId) &&
-        Objects.equals(this.emigo, emigoToken.emigo) &&
-        Objects.equals(this.signature, emigoToken.signature) &&
-        Objects.equals(this.token, emigoToken.token);
+    AmigoToken amigoToken = (AmigoToken) o;
+    return Objects.equals(this.amigoId, amigoToken.amigoId) &&
+        Objects.equals(this.amigo, amigoToken.amigo) &&
+        Objects.equals(this.signature, amigoToken.signature) &&
+        Objects.equals(this.token, amigoToken.token);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(emigoId, emigo, signature, token);
+    return Objects.hash(amigoId, amigo, signature, token);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class EmigoToken {\n");
+    sb.append("class AmigoToken {\n");
     
-    sb.append("    emigoId: ").append(toIndentedString(emigoId)).append("\n");
-    sb.append("    emigo: ").append(toIndentedString(emigo)).append("\n");
+    sb.append("    amigoId: ").append(toIndentedString(amigoId)).append("\n");
+    sb.append("    amigo: ").append(toIndentedString(amigo)).append("\n");
     sb.append("    signature: ").append(toIndentedString(signature)).append("\n");
     sb.append("    token: ").append(toIndentedString(token)).append("\n");
     sb.append("}");

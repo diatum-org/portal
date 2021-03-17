@@ -16,8 +16,8 @@ import javax.validation.constraints.*;
 
 
 public class UserEntry   {
-  @JsonProperty("emigoId")
-  private String emigoId = null;
+  @JsonProperty("amigoId")
+  private String amigoId = null;
 
   @JsonProperty("accountToken")
   private String accountToken = null;
@@ -25,24 +25,24 @@ public class UserEntry   {
   @JsonProperty("serviceToken")
   private String serviceToken = null;
 
-  public UserEntry emigoId(String emigoId) {
-    this.emigoId = emigoId;
+  public UserEntry amigoId(String amigoId) {
+    this.amigoId = amigoId;
     return this;
   }
 
   /**
-   * Get emigoId
-   * @return emigoId
+   * Get amigoId
+   * @return amigoId
   **/
   @ApiModelProperty(required = true, value = "")
       @NotNull
 
-    public String getEmigoId() {
-    return emigoId;
+    public String getAmigoId() {
+    return amigoId;
   }
 
-  public void setEmigoId(String emigoId) {
-    this.emigoId = emigoId;
+  public void setAmigoId(String amigoId) {
+    this.amigoId = amigoId;
   }
 
   public UserEntry accountToken(String accountToken) {
@@ -95,14 +95,14 @@ public class UserEntry   {
       return false;
     }
     UserEntry userEntry = (UserEntry) o;
-    return Objects.equals(this.emigoId, userEntry.emigoId) &&
+    return Objects.equals(this.amigoId, userEntry.amigoId) &&
         Objects.equals(this.accountToken, userEntry.accountToken) &&
         Objects.equals(this.serviceToken, userEntry.serviceToken);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(emigoId, accountToken, serviceToken);
+    return Objects.hash(amigoId, accountToken, serviceToken);
   }
 
   @Override
@@ -110,7 +110,7 @@ public class UserEntry   {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserEntry {\n");
     
-    sb.append("    emigoId: ").append(toIndentedString(emigoId)).append("\n");
+    sb.append("    amigoId: ").append(toIndentedString(amigoId)).append("\n");
     sb.append("    accountToken: ").append(toIndentedString(accountToken)).append("\n");
     sb.append("    serviceToken: ").append(toIndentedString(serviceToken)).append("\n");
     sb.append("}");

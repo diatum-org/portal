@@ -1,16 +1,16 @@
 <div *ngIf="configSet" class="config-data">
   <div class="config-row">
     <mat-form-field class="config-node">
-      <mat-label>Emigo Node</mat-label>
-      <input matInput [(ngModel)]="config.emigoNode" (change)="onNode()" spellcheck=false>
+      <mat-label>Amigo Node</mat-label>
+      <input matInput [(ngModel)]="config.amigoNode" (change)="onNode()" spellcheck=false>
     </mat-form-field>
     <div class="config-icon">
       <i *ngIf="nodeSet" class="fa fa-floppy-o config-check" (click)="onSaveNode()"></i>
     </div>
 
     <mat-form-field class="config-token">
-      <mat-label>Emigo Token</mat-label>
-      <input matInput [(ngModel)]="config.emigoToken" (change)="onToken()" spellcheck=false>
+      <mat-label>Amigo Token</mat-label>
+      <input matInput [(ngModel)]="config.amigoToken" (change)="onToken()" spellcheck=false>
     </mat-form-field>
     <div class="config-icon">
       <i *ngIf="tokenSet" class="fa fa-floppy-o config-check" (click)="onSaveToken()"></i>

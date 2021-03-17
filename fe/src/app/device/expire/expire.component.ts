@@ -13,7 +13,7 @@ export class ExpireComponent implements OnInit {
   public login: string;
   public password: string;
   public mode: string;
-  public emigoId: string;
+  public amigoId: string;
   public url: string = null;
   public expire: number = 24;
   public copied: boolean = false;
@@ -26,7 +26,7 @@ export class ExpireComponent implements OnInit {
     this.mode = data.mode;
     this.login = data.login;
     this.password = data.password;
-    this.emigoId = data.emigoId;
+    this.amigoId = data.amigoId;
   }
 
   ngOnInit() {
@@ -41,7 +41,7 @@ export class ExpireComponent implements OnInit {
       });
     }
     if(this.mode == 'reset') {
-      this.deviceService.resetAccount(this.login, this.password, this.expire * 3600, this.emigoId).then(l => {
+      this.deviceService.resetAccount(this.login, this.password, this.expire * 3600, this.amigoId).then(l => {
         this.url = l;
       }).catch(err => {
         window.alert("failed to create link");
