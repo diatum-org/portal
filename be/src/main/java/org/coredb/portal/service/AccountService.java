@@ -202,7 +202,7 @@ public class AccountService {
     // construct link request url
     String nodeToken = configService.getStrValue(CONFIG_EMIGOTOKEN, null);
     String emigoNode = configService.getStrValue(CONFIG_EMIGONODE, null);
-    String linkUrl = emigoNode + "/access/services/attached?token=" + nodeToken + "&emigoId=" + emigoId;
+    String linkUrl = emigoNode + "/access/services/attached?token=" + nodeToken + "&amigoId=" + emigoId;
 
     // post for link message
     HttpEntity<ServiceAccess> serviceAccess = new HttpEntity<ServiceAccess>(getAccess(), headers);
