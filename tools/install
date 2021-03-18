@@ -55,6 +55,7 @@ sudo chown tomcat:tomcat /var/lib/tomcat9/webapps/app.war
 cp stat.sh /home/ubuntu
 cp renew.sh /home/ubuntu
 cp synccert.sh /home/ubuntu
+cp backup.sh /home/ubuntu
 
 STAT=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32 ; echo ''`
 ACCT=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32 ; echo ''`
@@ -70,7 +71,7 @@ mysql -u root -proot portal -e "insert into config (config_id, str_value) values
 mysql -u root -proot portal -e "insert into config (config_id, str_value) values ('default_registry', '$REGISTRY')"
 
 crontab -r || true
-echo -e '*/15 * * * * bash /home/ubuntu/stat.sh\n5 5 * * * bash /home/ubuntu/synccert.sh\n4 4 * * * back /home/ubuntu/backup.sh' | crontab
+echo -e '*/15 * * * * bash /home/ubuntu/stat.sh\n5 5 * * * bash /home/ubuntu/synccert.sh\n4 4 * * * bash /home/ubuntu/backup.sh' | crontab
 
 sudo bash /home/ubuntu/renew.sh
 
