@@ -27,7 +27,7 @@ STATE=`echo $ROUTE | jq -r .ChangeInfo.Status`
 
 # wait for DNS to sync
 mysql -u root -proot portal -sN -e "update device set dns_status='syncing' where id='$RECORD'"
-logger "$RECORD: waiting for dns sync"
+logger "$RECORD: waiting for dns sync [$HOSTNAME] [$DOMAIN] [$IP]"
 for (( d=0; d < 60; ++d))
 do
   ROUTE=`/usr/bin/aws route53 get-change --region $REGION --output json --id $CHANGE`
