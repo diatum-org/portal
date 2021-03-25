@@ -260,10 +260,12 @@ public class DeviceService {
     deviceRepository.save(device);
 
     // launch dns update
-    String[] cmd = { "bash", "/opt/diatum/update.sh", device.getId().toString() };
-    ProcessBuilder processBuilder = new ProcessBuilder();
-    processBuilder.command(cmd);
-    Process process = processBuilder.start();
+    if(update) {
+      String[] cmd = { "bash", "/opt/diatum/update.sh", device.getId().toString() };
+      ProcessBuilder processBuilder = new ProcessBuilder();
+      processBuilder.command(cmd);
+      Process process = processBuilder.start();
+    }
   }
 
   public void testPort(String address, Integer port) throws Exception {
