@@ -250,7 +250,8 @@ export class AccountComponent implements OnInit {
         this.busy = false;
       });
     }).catch(err => {
-      window.alert("reset identity failed");
+      let details: string = err.headers.get("details");
+      window.alert("reset identity failed: " + details);
       this.busy = false;
     });
   }
