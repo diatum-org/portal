@@ -2,12 +2,16 @@ package org.coredb.portal.service;
 
 import java.util.*;
 import java.time.Instant;
+import java.time.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.net.SocketTimeoutException;
+import org.springframework.web.client.ResourceAccessException;
 
 import static org.coredb.portal.NameRegistry.*;
 
@@ -18,6 +22,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.web.client.RestClientException;
 
 import org.coredb.portal.model.ServiceAccess;
@@ -60,6 +65,8 @@ public class AccountService {
   @Autowired
   private ConfigService configService;
 
+  private static final int TIMEOUT = 15000;
+
   private ServiceAccess getAccess() {
     ServiceAccess access = new ServiceAccess();
     access.setEnableShow(true);
@@ -97,7 +104,7 @@ public class AccountService {
     Device device = create.getDevice();
 
     // rest object
-    RestTemplate rest = new RestTemplate();
+    RestTemplate rest = new RestTemplateBuilder().setConnectTimeout(TIMEOUT).setReadTimeout(TIMEOUT).build();
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     
@@ -113,9 +120,17 @@ public class AccountService {
       link = rest.postForObject(linkUrl, serviceAccess, LinkMessage.class);
     }
     catch(Exception e) {
-      // give request another chance
-      System.out.println(e.toString());
-      link = rest.postForObject(linkUrl, serviceAccess, LinkMessage.class);
+      try {
+        link = rest.postForObject(linkUrl, serviceAccess, LinkMessage.class);
+      }
+      catch(ResourceAccessException r) {
+        System.out.println(r.toString());
+        throw new Exception("app identity timeout");
+      }
+      catch (Exception f) {
+        System.out.println(f.toString());
+        throw new Exception("app identity error");
+      }
     }
 
     // construct account create url
@@ -129,9 +144,17 @@ public class AccountService {
       emigo = rest.postForObject(emigoUrl, linkMessage, AmigoToken.class);
     }
     catch(Exception e) {
-      // give request another chance
-      System.out.println(e.toString());
-      emigo = rest.postForObject(emigoUrl, linkMessage, AmigoToken.class);
+      try {
+        emigo = rest.postForObject(emigoUrl, linkMessage, AmigoToken.class);
+      }
+      catch(ResourceAccessException r) {
+        System.out.println(r.toString());
+        throw new Exception("identity host timeout");
+      }
+      catch (Exception f) {
+        System.out.println(f.toString());
+        throw new Exception("identity host error");
+      }
     }
 
     // construct user url
@@ -144,9 +167,17 @@ public class AccountService {
       user = rest.postForObject(userUrl, emigoToken, UserEntry.class);
     }
     catch(Exception e) {
-      // give request another chance
-      System.out.println(e.toString());
-      user = rest.postForObject(userUrl, emigoToken, UserEntry.class);
+      try {
+        user = rest.postForObject(userUrl, emigoToken, UserEntry.class);
+      }
+      catch(ResourceAccessException r) {
+        System.out.println(r.toString());
+        throw new Exception("registration timeout");
+      }
+      catch (Exception f) {
+        System.out.println(f.toString());
+        throw new Exception("registration error");
+      }
     }
 
     // store new pass
@@ -195,7 +226,7 @@ public class AccountService {
     String emigoId = reset.getEmigoId();
 
     // rest object
-    RestTemplate rest = new RestTemplate();
+    RestTemplate rest = new RestTemplateBuilder().setConnectTimeout(TIMEOUT).setReadTimeout(TIMEOUT).build();
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -211,9 +242,17 @@ public class AccountService {
       link  = rest.postForObject(linkUrl, serviceAccess, LinkMessage.class);
     }
     catch(Exception e) {
-      // give request another chance
-      System.out.println(e.toString());
-      link  = rest.postForObject(linkUrl, serviceAccess, LinkMessage.class);
+      try {
+        link  = rest.postForObject(linkUrl, serviceAccess, LinkMessage.class);
+      }
+      catch(ResourceAccessException r) {
+        System.out.println(r.toString());
+        throw new Exception("app identity timeout");
+      }
+      catch (Exception f) {
+        System.out.println(f.toString());
+        throw new Exception("app identity error");
+      }
     }
 
     // construct account create url
@@ -227,9 +266,17 @@ public class AccountService {
       response = rest.exchange(emigoUrl, HttpMethod.PUT, linkMessage, AmigoToken.class);
     }
     catch(Exception e) {
-      // give request another chance
-      System.out.println(e.toString());
-      response = rest.exchange(emigoUrl, HttpMethod.PUT, linkMessage, AmigoToken.class);
+      try {
+        response = rest.exchange(emigoUrl, HttpMethod.PUT, linkMessage, AmigoToken.class);
+      }
+      catch(ResourceAccessException r) {
+        System.out.println(r.toString());
+        throw new Exception("app identity timeout");
+      }
+      catch (Exception f) {
+        System.out.println(f.toString());
+        throw new Exception("app identity error");
+      }
     }
     AmigoToken emigo = response.getBody();
 
@@ -243,9 +290,17 @@ public class AccountService {
       user = rest.postForObject(userUrl, emigoToken, UserEntry.class);
     }
     catch(Exception e) {
-      // give request another chance
-      System.out.println(e.toString());
-      user = rest.postForObject(userUrl, emigoToken, UserEntry.class);
+      try {
+        user = rest.postForObject(userUrl, emigoToken, UserEntry.class);
+      }
+      catch(ResourceAccessException r) {
+        System.out.println(r.toString());
+        throw new Exception("registration timeout");
+      }
+      catch (Exception f) {
+        System.out.println(f.toString());
+        throw new Exception("registration error");
+      }
     }
 
     // store new pass

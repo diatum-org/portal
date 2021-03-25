@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import org.springframework.http.HttpHeaders;
+
 import org.coredb.portal.service.AccountService;
 
 import javax.validation.constraints.*;
@@ -68,7 +70,9 @@ public class AccountApiController implements AccountApi {
       }
       catch(Exception e) {
         log.error(e.toString());
-        return new ResponseEntity<AccountEntry>(HttpStatus.INTERNAL_SERVER_ERROR);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("details", e.getMessage());
+        return new ResponseEntity<AccountEntry>(headers, HttpStatus.SERVICE_UNAVAILABLE);
       }
     }
 
@@ -132,7 +136,9 @@ public class AccountApiController implements AccountApi {
       }
       catch(Exception e) {
         log.error(e.toString());
-        return new ResponseEntity<AccountEntry>(HttpStatus.INTERNAL_SERVER_ERROR);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("details", e.getMessage());
+        return new ResponseEntity<AccountEntry>(headers, HttpStatus.SERVICE_UNAVAILABLE);
       }
     }
 

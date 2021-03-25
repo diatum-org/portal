@@ -155,7 +155,8 @@ export class AccountComponent implements OnInit {
         this.busy = false;
       });
     }).catch(err => {
-      window.alert("create identity failed");
+      let details: string = err.headers.get("details");
+      window.alert("create identity failed: " + details);
       this.busy = false;
     });
   }
