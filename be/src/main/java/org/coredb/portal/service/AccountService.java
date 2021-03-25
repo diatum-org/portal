@@ -123,10 +123,6 @@ public class AccountService {
       try {
         link = rest.postForObject(linkUrl, serviceAccess, LinkMessage.class);
       }
-      catch(ResourceAccessException r) {
-        System.out.println(r.toString());
-        throw new Exception("app identity timeout");
-      }
       catch (Exception f) {
         System.out.println(f.toString());
         throw new Exception("app identity error");
@@ -147,10 +143,6 @@ public class AccountService {
       try {
         emigo = rest.postForObject(emigoUrl, linkMessage, AmigoToken.class);
       }
-      catch(ResourceAccessException r) {
-        System.out.println(r.toString());
-        throw new Exception("identity host timeout");
-      }
       catch (Exception f) {
         System.out.println(f.toString());
         throw new Exception("identity host error");
@@ -169,10 +161,6 @@ public class AccountService {
     catch(Exception e) {
       try {
         user = rest.postForObject(userUrl, emigoToken, UserEntry.class);
-      }
-      catch(ResourceAccessException r) {
-        System.out.println(r.toString());
-        throw new Exception("registration timeout");
       }
       catch (Exception f) {
         System.out.println(f.toString());
@@ -245,10 +233,6 @@ public class AccountService {
       try {
         link  = rest.postForObject(linkUrl, serviceAccess, LinkMessage.class);
       }
-      catch(ResourceAccessException r) {
-        System.out.println(r.toString());
-        throw new Exception("app identity timeout");
-      }
       catch (Exception f) {
         System.out.println(f.toString());
         throw new Exception("app identity error");
@@ -269,10 +253,6 @@ public class AccountService {
       try {
         response = rest.exchange(emigoUrl, HttpMethod.PUT, linkMessage, AmigoToken.class);
       }
-      catch(ResourceAccessException r) {
-        System.out.println(r.toString());
-        throw new Exception("app identity timeout");
-      }
       catch (Exception f) {
         System.out.println(f.toString());
         throw new Exception("app identity error");
@@ -292,10 +272,6 @@ public class AccountService {
     catch(Exception e) {
       try {
         user = rest.postForObject(userUrl, emigoToken, UserEntry.class);
-      }
-      catch(ResourceAccessException r) {
-        System.out.println(r.toString());
-        throw new Exception("registration timeout");
       }
       catch (Exception f) {
         System.out.println(f.toString());
