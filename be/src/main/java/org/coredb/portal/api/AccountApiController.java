@@ -76,6 +76,23 @@ public class AccountApiController implements AccountApi {
       }
     }
 
+    public ResponseEntity<String> setPassCode(@NotNull @ApiParam(value = "id of amigo to access", required = true) @Valid @RequestParam(value = "amigoId", required = true) String amigoId
+,@NotNull @ApiParam(value = "account login password", required = true) @Valid @RequestParam(value = "password", required = true) String password
+) {
+      try {
+        String code = accountService.setPassCode(amigoId, password);
+        return new ResponseEntity<String>(code, HttpStatus.CREATED);
+      }
+      catch(AccessDeniedException e) {
+        log.error(e.toString());
+        return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
+      }
+      catch(Exception e) {
+        log.error(e.toString());
+        return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+    }
+
     public ResponseEntity<Void> changePassword(@NotNull @ApiParam(value = "id of amigo to access", required = true) @Valid @RequestParam(value = "amigoId", required = true) String amigoId
 ,@NotNull @ApiParam(value = "current password to use for login", required = true) @Valid @RequestParam(value = "current", required = true) String current
 ,@NotNull @ApiParam(value = "next password to use for login", required = true) @Valid @RequestParam(value = "next", required = true) String next

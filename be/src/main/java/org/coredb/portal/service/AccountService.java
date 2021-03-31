@@ -29,6 +29,7 @@ import org.coredb.portal.model.ServiceAccess;
 import org.coredb.portal.model.LinkMessage;
 import org.coredb.portal.model.UserEntry;
 import org.coredb.portal.model.AmigoToken;
+import org.coredb.portal.model.Pass;
 
 import org.coredb.portal.model.AccountEntry;
 
@@ -305,6 +306,42 @@ public class AccountService {
 
   public String getRegistry() {
     return configService.getStrValue(CONFIG_EMIGOREGISTRY, null);
+  }
+
+  public String setPassCode(String amigoId, String password) throws NotFoundException, AccessDeniedException, Exception {
+
+    Account account = accountRepository.findOneByEmigoId(amigoId);
+    if(account == null) {
+      throw new NotFoundException(404, "id not found");
+    }
+    String pass = Password.prepare(password, account.getSalt());
+    if(!account.getPassword().equals(pass)) {
+      throw new AccessDeniedException("login failed");
+    }
+
+    Device device = account.getDevice();
+    String passUrl = "https://" + device.getDns() + ":" + device.getPort() + "/" + device.getApp() + "/access/accounts/tokens?token="
+        + account.getToken() + "&expire=3600";
+
+    // post for pass
+    Pass code;
+    RestTemplate rest = new RestTemplateBuilder().setConnectTimeout(TIMEOUT).setReadTimeout(TIMEOUT).build();
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<ServiceAccess> serviceAccess = new HttpEntity<ServiceAccess>(getAccess(), headers);
+    try {
+      code = rest.postForObject(passUrl, serviceAccess, Pass.class);
+    }
+    catch(Exception e) {
+      try {
+        code = rest.postForObject(passUrl, serviceAccess, Pass.class);
+      }
+      catch (Exception f) {
+        System.out.println(f.toString());
+        throw new Exception("host node error");
+      }
+    }
+    return code.getData();
   }
 
   public AccountEntry getIdentity(String emigoId, String password) throws NotFoundException, AccessDeniedException, Exception {

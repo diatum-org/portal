@@ -39,6 +39,18 @@ public interface AccountApi {
 );
 
 
+    @ApiOperation(value = "", nickname = "setPassCode", notes = "Generate pass code", tags={ "account", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 201, message = "generated"),
+        @ApiResponse(code = 401, message = "invalid password"),
+        @ApiResponse(code = 500, message = "internal server error") })
+    @RequestMapping(value = "/account/passcode",
+        method = RequestMethod.PUT)
+    ResponseEntity<String> setPassCode(@NotNull @ApiParam(value = "id of amigo to access", required = true) @Valid @RequestParam(value = "amigoId", required = true) String amigoId
+,@NotNull @ApiParam(value = "account login password", required = true) @Valid @RequestParam(value = "password", required = true) String password
+);
+
+
     @ApiOperation(value = "", nickname = "changePassword", notes = "Change account password", tags={ "account", })
     @ApiResponses(value = { 
         @ApiResponse(code = 201, message = "account updated"),

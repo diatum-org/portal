@@ -1,3 +1,4 @@
+
 openapi: 3.0.0
 # Added by API Auto Mocking Plugin
 info:
@@ -78,7 +79,7 @@ paths:
           description: access denied
         '500':
           description: internal server error
-          
+
   /admin/config/node:
     put:
       tags:
@@ -632,7 +633,7 @@ paths:
             application/json:
               schema:
                 type: string
-          
+
   /account/password:
     put:
       tags:
@@ -667,6 +668,38 @@ paths:
         '500':
           description: internal server error
 
+  /account/passcode:
+    put:
+      tags:
+        - account
+      description: Generate pass code
+      operationId: set-pass-code
+      parameters:
+        - name: amigoId
+          in: query
+          description: id of amigo to access
+          required: true
+          schema:
+            type: string
+            format: amigo-id
+        - name: password
+          in: query
+          description: portal login password
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: generated
+          content:
+            application/json:
+              schema:
+                type: string
+        '401':
+          description: invalid password
+        '500':
+          description: internal server error
+          
 components:
   schemas:
 
@@ -940,4 +973,5 @@ components:
           format: protocol-version
         handle:
           type: string
+
 
