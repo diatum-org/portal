@@ -81,7 +81,7 @@ public class AccountApiController implements AccountApi {
 ) {
       try {
         String code = accountService.setPassCode(amigoId, password);
-        return new ResponseEntity<String>(code, HttpStatus.CREATED);
+        return new ResponseEntity<String>("\"" + code + "\"", HttpStatus.CREATED);
       }
       catch(AccessDeniedException e) {
         log.error(e.toString());
