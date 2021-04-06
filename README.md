@@ -5,7 +5,7 @@
   </a>
 </p>
 
-<b>Portal</b> provides a web app for managing CoreDB nodes. Once a device is registered, identities can be created and managed through the portal. Attachment codes can also be generated wich allow apps to connect to an identity on behalf of the owner. An overview of the Diatum identity network is given <a href="https://diatum.org/developers/technical-intro/">here</a>. 
+<b>Portal</b> provides a web app for managing CoreDB nodes. Once a device is registered, identities can be created and managed through the portal. Attachment codes can also be generated wich allow apps to connect to an identity on behalf of the owner. The primary artifact of this repository is a self extracting installer for an Ubuntu 18.04 system. An overview of the Diatum identity network is given <a href="https://diatum.org/developers/technical-intro/">here</a>. 
  
 # System HowTo
 <p align="center"><b>CoreDB</b>: &nbsp Install a node &nbsp OR &nbsp Find someone hosting a node</p>
