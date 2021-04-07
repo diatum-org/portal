@@ -288,6 +288,28 @@ export class AccountComponent implements OnInit {
       this.busy = false;
     });
   }
+
+  public isIos() {
+    if(navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+      return true;
+    }
+    return false;
+  }
+
+  public isAndroid(): boolean {
+    if(navigator.userAgent.match(/Android/i)) {
+      return true;
+    }
+    return false;
+  }
+
+  public isWeb(): boolean {
+    if(this.isIos() || this.isAndroid()) {
+      return false;
+    }
+    return true;
+  }
+
 }
 
 
