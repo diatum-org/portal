@@ -17,6 +17,7 @@ import { Amigo } from './amigo';
 })
 export class AccountComponent implements OnInit {
 
+  public agree: boolean = false;
   public mode: string = null;
   public entry: AccountEntry = null;
   public defaultRegistry: string = null;
@@ -133,6 +134,10 @@ export class AccountComponent implements OnInit {
 
   public setConfirmType(t: string) {
     this.confirmType = t;
+  }
+
+  public setAgree() {
+    this.agree = true;
   }
 
   public onCreate() {

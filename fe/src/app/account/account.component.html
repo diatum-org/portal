@@ -3,13 +3,24 @@
 </div>
 
 <div *ngIf="mode=='create'">
-  <div *ngIf="entry==null" class="account-create">
+  <div *ngIf="entry==null && !agree" class="account-create">
     <div class="account-label">Welcome!</div>
     <div class="account-info">A Diatabase is your personal storage space to upload, store and access your contacts, photos, videos, and other data used with our community of apps.</div>
     <div class="account-info">The Diatabase software was created by Diatum, a nonprofit with a mission to give you ownership and control of your data and privacy, and is hosted by the sender of this link.</div>
     <img class="account-img" src="assets/unlocked.png">
+    <div class="account-label">First our terms of service.</div>
+    <div class="account-info">Before your click agree, we have a unique set of terms and data policies that set us apart.</div>
+    <div class="account-form">
+      <a class="account-link" href="https://diatum.org/terms-of-service" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+      <a class="account-link" href="https://diatum.org/policies-introduction" target="_blank" rel="noopener noreferrer">Data Policy</a>
+      <div class="account-control">
+        <button mat-raised-button class="account-button" color="primary" (click)="setAgree()">I Agree</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="entry==null && agree" class="account-create">
     <div class="account-label">Let's get started.</div>
-    <div class="account-info">First we need to create your personal Diatabase. Be sure to give it a strong password.</div>
+    <div class="account-info">We need to create your personal Diatabase. Be sure to give it a strong password.</div>
     <mat-spinner *ngIf="busy" class="account-busy"></mat-spinner>
     <div class="spacer"></div>
     <div class="account-form">
