@@ -26,9 +26,9 @@ LAST_CPU0_IDLE=`cat /tmp/last_cpu_idle true 2> /dev/null || true`
 LAST_CPU0_IDLE=`expr $LAST_CPU0_IDLE + 0 || true`
 echo $CPU0_IDLE > /tmp/last_cpu_idle
 
-TOTAL=`expr $CPU0_TOTAL - $LAST_CPU0_TOTAL`
-IDLE=`expr $CPU0_IDLE - $LAST_CPU0_IDLE`
-CPU=`expr 100 \* $IDLE / $TOTAL`
+TOTAL=`expr $CPU0_TOTAL - $LAST_CPU0_TOTAL` || true
+IDLE=`expr $CPU0_IDLE - $LAST_CPU0_IDLE` || true
+CPU=`expr 100 \* $IDLE / $TOTAL` || true
 
 curl -X POST "$HOST/admin/stats?token=$TOKEN&processor=$CPU&memory=$MEM&storage=$STORAGE"
 
