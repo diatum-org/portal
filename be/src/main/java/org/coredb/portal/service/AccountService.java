@@ -81,6 +81,7 @@ public class AccountService {
     access.setEnableUser(true);
     access.setEnableAccess(true);
     access.setEnableAccount(true);
+    access.setEnableConversation(true);
     return access;
   }
 

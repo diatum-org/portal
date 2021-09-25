@@ -23,4 +23,5 @@ export interface ServiceAccess {
     enableAccess?: boolean;
     enableAccount?: boolean;
     enableAgent?: boolean;
+    enableConversation?: boolean;
 }

@@ -49,6 +49,9 @@ public class ServiceAccess   {
   @JsonProperty("enableAccount")
   private Boolean enableAccount = null;
 
+  @JsonProperty("enableConversation")
+  private Boolean enableConversation = null;
+
   public ServiceAccess enableShow(Boolean enableShow) {
     this.enableShow = enableShow;
     return this;
@@ -258,6 +261,24 @@ public class ServiceAccess   {
     this.enableAccount = enableAccount;
   }
 
+  public ServiceAccess enableConversation(Boolean enableConversation) {
+    this.enableConversation = enableConversation;
+    return this;
+  }
+
+  /**
+   * Get enableConversation
+   * @return enableConversation
+   **/
+  @ApiModelProperty(value = "")
+  
+    public Boolean isEnableConversation() {
+    return enableConversation;
+  }
+
+  public void setEnableConversation(Boolean enableConversation) {
+    this.enableConversation = enableConversation;
+  }
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -278,12 +299,13 @@ public class ServiceAccess   {
         Objects.equals(this.enableIndex, serviceAccess.enableIndex) &&
         Objects.equals(this.enableUser, serviceAccess.enableUser) &&
         Objects.equals(this.enableAccess, serviceAccess.enableAccess) &&
-        Objects.equals(this.enableAccount, serviceAccess.enableAccount);
+        Objects.equals(this.enableAccount, serviceAccess.enableAccount) &&
+        Objects.equals(this.enableConversation, serviceAccess.enableConversation);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(enableShow, enableIdentity, enableProfile, enableGroup, enableShare, enablePrompt, enableService, enableIndex, enableUser, enableAccess, enableAccount);
+    return Objects.hash(enableShow, enableIdentity, enableProfile, enableGroup, enableShare, enablePrompt, enableService, enableIndex, enableUser, enableAccess, enableAccount, enableConversation);
   }
 
   @Override
@@ -302,6 +324,7 @@ public class ServiceAccess   {
     sb.append("    enableUser: ").append(toIndentedString(enableUser)).append("\n");
     sb.append("    enableAccess: ").append(toIndentedString(enableAccess)).append("\n");
     sb.append("    enableAccount: ").append(toIndentedString(enableAccount)).append("\n");
+    sb.append("    enableConversation: ").append(toIndentedString(enableConversation)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -29,7 +29,7 @@ export class ExpireComponent implements OnInit {
     let service: ServiceAccess = { enableShow: true, enableIdentity: true, enableProfile: true,
         enableGroup: true, enableShare: true, enablePrompt: true, enableService: true,
         enableIndex: true, enableUser: true, enableAccess: true, enableAccount: true, 
-        enableAgent: true };
+        enableAgent: true, enableConversation: true };
     this.accountService.generatePass(this.entry, this.expire * 60, service).then(p => {
       this.code = p.data;
     }).catch(err => {
