@@ -70,6 +70,62 @@
       <img class="account-face" src="assets/profile.png">
       <img class="account-img" src="assets/locked.png">
     </div>
+    <div *ngIf="hasUsername()">
+      <div class="account-label">Okay, now we need some apps!</div>
+      <div class="account-info">In our system, apps need to attach to your Diatabase to have access to your data, including your contacts, photos and videos.</div>
+
+      <div *ngIf="isWeb()" class="listing">
+        <div class="apps">
+          <a class="app" href="https://diatum.org/dikota/">
+            <img class="icon" src="https://s3-us-west-2.amazonaws.com/org.diatum.public/dikota.png">
+            <div class="name">Dikota</div>
+          </a>
+          <a class="app" href="https://diatum.org/jupstream/">
+            <img class="icon" src="https://s3-us-west-2.amazonaws.com/org.diatum.public/jupstream.png">
+            <div class="name">Jupstream</div>
+          </a>
+          <a class="app" href="https://github.com/rolandosborne/IndiView">
+            <img class="icon" src="https://raw.githubusercontent.com/rolandosborne/IndiView/main/docs/photos/ivicon.png">
+            <div class="name">IndiView</div>
+          </a>
+        </div>
+      </div>
+
+      <div *ngIf="isIos()" class="listing">
+        <div class="apps">
+          <a class="app" href="itms-apps://apps.apple.com/us/app/dikota/id1526510086">
+            <img class="icon" src="https://s3-us-west-2.amazonaws.com/org.diatum.public/dikota.png">
+            <div class="name">Dikota</div>
+          </a>
+          <a class="app" href="itms-apps://apps.apple.com/us/app/jupstream/id1559285751">
+            <img class="icon" src="https://s3-us-west-2.amazonaws.com/org.diatum.public/jupstream.png">
+            <div class="name">Jupstream</div>
+          </a>
+          <a class="app" href="itms-apps://apps.apple.com/us/app/indiview/id1569089072">
+            <img class="icon" src="https://raw.githubusercontent.com/rolandosborne/IndiView/main/docs/photos/ivicon.png">
+            <div class="name">IndiView</div>
+          </a>
+        </div>
+      </div>
+
+      <div *ngIf="isAndroid()" class="listing">
+        <div class="apps">
+          <a class="app" href="https://play.google.com/store/apps/details?id=org.diatum.dikota">
+            <img class="icon" src="https://s3-us-west-2.amazonaws.com/org.diatum.public/dikota.png">
+            <div class="name">Dikota</div>
+          </a>
+          <a class="app" href="https://play.google.com/store/apps/details?id=org.diatum.jupstream">
+            <img class="icon" src="https://s3-us-west-2.amazonaws.com/org.diatum.public/jupstream.png">
+            <div class="name">Jupstream</div>
+          </a>
+          <a class="app" href="https://play.google.com/store/apps/details?id=com.indiview">
+            <img class="icon" src="https://raw.githubusercontent.com/rolandosborne/IndiView/main/docs/photos/ivicon.png">
+            <div class="name">IndiView</div>
+          </a>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
@@ -125,3 +181,4 @@
     <div class="col-md-3 copyright">&copy; Copyright Diatum 2021</div>
   </div>
 </div>
+
