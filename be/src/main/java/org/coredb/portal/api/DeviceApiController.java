@@ -46,6 +46,34 @@ public class DeviceApiController implements DeviceApi {
         this.request = request;
     }
 
+    public ResponseEntity<Void> addChallenge(@NotNull @ApiParam(value = "device token", required = true) @Valid @RequestParam(value = "token", required = true) String token, @NotNull @ApiParam(value = "device name", required = true) @Valid @RequestParam(value = "name", required = true) String name, @NotNull @ApiParam(value = "device value", required = true) @Valid @RequestParam(value = "value", required = true) String value) {
+      try {
+        deviceService.addChallenge(token, name, value);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
+      }
+      catch(NotFoundException e) {
+        return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+      }
+      catch(Exception e) {
+        log.error(e.toString());
+        return new ResponseEntity<Void>(HttpStatus.SERVICE_UNAVAILABLE);
+      }
+    }
+
+    public ResponseEntity<Void> removeChallenge(@NotNull @ApiParam(value = "device token", required = true) @Valid @RequestParam(value = "token", required = true) String token, @NotNull @ApiParam(value = "device name", required = true) @Valid @RequestParam(value = "name", required = true) String name, @NotNull @ApiParam(value = "device value", required = true) @Valid @RequestParam(value = "value", required = true) String value) {
+      try {
+        deviceService.removeChallenge(token, name, value);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
+      }
+      catch(NotFoundException e) {
+        return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+      }
+      catch(Exception e) {
+        log.error(e.toString());
+        return new ResponseEntity<Void>(HttpStatus.SERVICE_UNAVAILABLE);
+      }
+    }
+
     public ResponseEntity<String> addDevice(@ApiParam(value = "parameters for device"  )  @Valid @RequestBody DeviceParams body, HttpServletRequest request) {
       try {
         String token = deviceService.addDevice(body, request.getRemoteAddr());        

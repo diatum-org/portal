@@ -37,6 +37,7 @@ sudo mv portal.version /opt/diatum/
 sudo mv test.sh /opt/diatum/
 sudo mv update.sh /opt/diatum/
 sudo mv register.sh /opt/diatum/
+sudo mv challenge.sh /opt/diatum/
 sudo chown tomcat:tomcat /opt/diatum/* 
 
 sudo certbot certonly --standalone -d $NAME --agree-tos --no-eff-email --register-unsafely-without-email

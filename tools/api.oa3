@@ -396,6 +396,72 @@ paths:
         '500':
           description: internal server error
 
+  /device/challenge:
+    post:
+      tags:
+        - device
+      description: add dns challenge
+      operationId: add-challenge
+      parameters:
+        - name: token
+          in: query
+          description: access token
+          required: true
+          schema:
+            type: string
+            format: secure-token
+        - name: name
+          in: query
+          description: name of record to create
+          required: true
+          schema:
+            type: string
+        - name: value
+          in: query
+          description: value for created record
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: update successful
+        '401':
+          description: invalid token
+        '500':
+          description: internal server error
+    delete:
+      tags:
+        - device
+      description: remove dns challenge record
+      operationId: remove-challenge
+      parameters:
+        - name: token
+          in: query
+          description: access token
+          required: true
+          schema:
+            type: string
+            format: secure-token
+        - name: name
+          in: query
+          description: name of record to create
+          required: true
+          schema:
+            type: string
+        - name: value
+          in: query
+          description: value for created record
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: update successful
+        '401':
+          description: invalid token
+        '500':
+          description: internal server error
+          
   /device/port:
     put:
       tags:

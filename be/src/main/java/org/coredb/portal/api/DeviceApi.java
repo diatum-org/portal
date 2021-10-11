@@ -29,6 +29,25 @@ import java.util.Map;
 @Api(value = "device", description = "the device API")
 public interface DeviceApi {
 
+    @ApiOperation(value = "", nickname = "add dns challenge", notes = "set a dns challenge", response = String.class, tags={ "device", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation"),
+        @ApiResponse(code = 406, message = "device limit reached"),
+        @ApiResponse(code = 500, message = "internal server error") })
+    @RequestMapping(value = "/device/challenge",
+        method = RequestMethod.POST)
+    ResponseEntity<Void> addChallenge(@NotNull @ApiParam(value = "device token", required = true) @Valid @RequestParam(value = "token", required = true) String token, @NotNull @ApiParam(value = "device name", required = true) @Valid @RequestParam(value = "name", required = true) String name, @NotNull @ApiParam(value = "device value", required = true) @Valid @RequestParam(value = "value", required = true) String value);
+
+ 
+    @ApiOperation(value = "", nickname = "remove dns challenge", notes = "set a dns challenge", response = String.class, tags={ "device", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "successful operation"),
+        @ApiResponse(code = 406, message = "device limit reached"),
+        @ApiResponse(code = 500, message = "internal server error") })
+    @RequestMapping(value = "/device/challenge",
+        method = RequestMethod.DELETE)
+    ResponseEntity<Void> removeChallenge(@NotNull @ApiParam(value = "device token", required = true) @Valid @RequestParam(value = "token", required = true) String token, @NotNull @ApiParam(value = "device name", required = true) @Valid @RequestParam(value = "name", required = true) String name, @NotNull @ApiParam(value = "device value", required = true) @Valid @RequestParam(value = "value", required = true) String value);
+       
 
     @ApiOperation(value = "", nickname = "addDevice", notes = "Register a device name", response = String.class, tags={ "device", })
     @ApiResponses(value = { 

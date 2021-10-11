@@ -25,13 +25,14 @@ cp ./tools/setup.sql artifacts/
 cp ./tools/stat.sh artifacts/
 cp ./tools/test.sh artifacts/
 cp ./tools/register.sh artifacts/
+cp ./tools/challenge.sh artifacts/
 cp ./tools/update.sh artifacts/
 cp ./tools/schema/baseline.sql artifacts/
 cp ./tools/schema/V01__noop.sql artifacts/
 cp ./tools/schema/V02__domains.sql artifacts/
 cd artifacts
 echo "$1" > build.version
-tar cvf install.tar app.war backup.sh renew.sh synccert.sh setup.sql stat.sh test.sh register.sh update.sh baseline.sql V01__noop.sql V02__domains.sql major.version minor.version build.version
+tar cvf install.tar app.war backup.sh renew.sh synccert.sh setup.sql stat.sh test.sh challenge.sh register.sh update.sh baseline.sql V01__noop.sql V02__domains.sql major.version minor.version build.version
 md5sum install.tar > install.tar.md5
 cd ..
 

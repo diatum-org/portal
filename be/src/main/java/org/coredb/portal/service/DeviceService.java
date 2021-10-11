@@ -2,6 +2,7 @@ package org.coredb.portal.service;
 
 import java.util.*;
 import java.time.Instant;
+import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,9 +39,14 @@ import org.coredb.portal.model.DeviceParams;
 import org.coredb.portal.jpa.entity.Device;
 import org.coredb.portal.jpa.repository.DeviceRepository;
 
+import java.lang.InterruptedException;
+import java.io.IOException;
+
 @Service
 public class DeviceService {
-
+    
+  private static final Logger log = LoggerFactory.getLogger(DeviceService.class);
+  
   @Autowired
   private DeviceRepository deviceRepository;
 
@@ -222,6 +228,38 @@ public class DeviceService {
     Process process = processBuilder.start();
  
     return token;
+  }
+
+  public void addChallenge(String token, String name, String value) throws NotFoundException, IOException, InterruptedException {
+    Device device = deviceRepository.findOneByPortalToken(token);
+    if(device == null) {
+      throw new NotFoundException(404, "device not found");
+    }
+
+    String[] cmd = { "bash", "/opt/diatum/challenge.sh", "CREATE", device.getId().toString(), name, value };
+    ProcessBuilder processBuilder = new ProcessBuilder();
+    processBuilder.command(cmd);
+    Process process = processBuilder.start();
+    process.waitFor(60, TimeUnit.SECONDS);
+    if(process.exitValue() != 0) {
+      throw new IOException("failed to set challenge");
+    }
+  }
+
+  public void removeChallenge(String token, String name, String value) throws NotFoundException, IOException, InterruptedException {
+    Device device = deviceRepository.findOneByPortalToken(token);
+    if(device == null) {
+      throw new NotFoundException(404, "device not found");
+    }
+
+    String[] cmd = { "bash", "/opt/diatum/challenge.sh", "DELETE", device.getId().toString(), name, value };
+    ProcessBuilder processBuilder = new ProcessBuilder();
+    processBuilder.command(cmd);
+    Process process = processBuilder.start();
+    process.waitFor(60, TimeUnit.SECONDS);
+    if(process.exitValue() != 0) {
+      throw new IOException("failed to set challenge");
+    }
   }
 
   @Transactional
